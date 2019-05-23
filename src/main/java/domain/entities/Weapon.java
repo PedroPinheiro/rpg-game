@@ -1,6 +1,6 @@
 package domain.entities;
 
-public class Weapon {
+public class Weapon implements Item {
 
     private WeaponType type;
     private int shots;
@@ -15,6 +15,14 @@ public class Weapon {
 
     public WeaponType getType() {
         return type;
+    }
+
+    public String getName() {
+        return type.getName();
+    }
+
+    public int getDamage() {
+        return type.getDamage();
     }
 
     public void shoot() {

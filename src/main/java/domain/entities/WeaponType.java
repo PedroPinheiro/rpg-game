@@ -1,17 +1,19 @@
 package domain.entities;
 
-public class WeaponType {
+public class WeaponType implements ItemType {
 
     private String name;
     private int damage;
-    private int distance;
+    private int range;
     private int shots;
+    private int slots;
 
-    public WeaponType(String name, int damage, int distance, int shots) {
+    public WeaponType(String name, int damage, int range, int shots, int slots) {
         this.name = name;
         this.damage = damage;
-        this.distance = distance;
+        this.range = range;
         this.shots = shots;
+        this.slots = slots;
     }
 
     public String getName() {
@@ -23,11 +25,16 @@ public class WeaponType {
     }
 
     public int getDistance() {
-        return distance;
+        return range;
     }
 
     public int getShots() {
         return shots;
+    }
+
+    @Override
+    public int getSlots() {
+        return slots;
     }
 
     public boolean isFireGun() {
