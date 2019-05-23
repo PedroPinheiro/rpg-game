@@ -8,15 +8,25 @@ import java.util.List;
 public class Backpack {
 
     private List<Item> items;
-    private int availableSlots = 20;
+    private int availableSlots;
+    private int maxSlots;
 
-    public Backpack() {
+    public Backpack(int maxSlots) {
         items = new ArrayList<>();
+        this.availableSlots = maxSlots;
+        this.maxSlots = maxSlots;
     }
 
-    public void addItem(Item item) throws BackpackIsFullException {
-        if (!canAddItem(item)) {
+    public int getAvailableSlots() {
+        return availableSlots;
+    }
+
+    public void addItem(Item item) throws BackpackIsFullException, ItemWillNotFitInBackpackException {
+        if (isFull()) {
             throw new BackpackIsFullException();
+        }
+        if (itemWillNotFit(item)) {
+            throw new ItemWillNotFitInBackpackException(item);
         }
         availableSlots -= item.getType().getSlots();
         items.add(item);
@@ -27,7 +37,11 @@ public class Backpack {
         items.remove(item);
     }
 
-    private boolean canAddItem(Item item) {
-        return availableSlots - item.getType().getSlots() > 0;
+    private boolean isFull() {
+        return availableSlots == 0;
+    }
+
+    private boolean itemWillNotFit(Item item) {
+        return availableSlots - item.getType().getSlots() < 0;
     }
 }
