@@ -1,9 +1,12 @@
 package domain.entities.characters;
 
+import domain.entities.backpack.Backpack;
+
 public class Player extends Character {
 
     private String name;
     private int maxHealth;
+    private Backpack backpack;
 
     private Player() {
 
