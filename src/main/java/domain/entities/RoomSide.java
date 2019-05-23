@@ -1,5 +1,7 @@
 package domain.entities;
 
+import domain.entities.items.Item;
+
 import java.util.List;
 
 public class RoomSide {

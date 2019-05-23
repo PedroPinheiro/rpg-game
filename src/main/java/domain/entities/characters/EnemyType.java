@@ -1,4 +1,4 @@
-package domain.entities;
+package domain.entities.characters;
 
 public class EnemyType {
 

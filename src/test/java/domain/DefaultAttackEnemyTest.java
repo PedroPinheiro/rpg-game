@@ -1,6 +1,10 @@
 package domain;
 
-import domain.entities.*;
+import domain.entities.characters.Enemy;
+import domain.entities.characters.EnemyType;
+import domain.entities.characters.Player;
+import domain.entities.items.Weapon;
+import domain.entities.items.WeaponType;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.*;

@@ -1,8 +1,8 @@
 package domain;
 
-import domain.entities.Enemy;
-import domain.entities.Weapon;
-import domain.entities.Player;
+import domain.entities.characters.Enemy;
+import domain.entities.items.Weapon;
+import domain.entities.characters.Player;
 
 public interface AttackEnemy {
 

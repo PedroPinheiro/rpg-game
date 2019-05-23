@@ -1,4 +1,4 @@
-package domain.entities;
+package domain.entities.items;
 
 public class Weapon implements Item {
 
