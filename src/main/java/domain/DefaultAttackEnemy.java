@@ -13,9 +13,9 @@ public class DefaultAttackEnemy implements AttackEnemy {
         Enemy enemy = requestModel.getEnemy();
         Weapon weapon = requestModel.getWeapon();
 
+        weapon.shoot();
         player.receiveDamage(enemy.getType().getDamage());
         enemy.receiveDamage(weapon.getType().getDamage());
-        weapon.shoot();
 
         return mountResponse(player, weapon, enemy);
     }
