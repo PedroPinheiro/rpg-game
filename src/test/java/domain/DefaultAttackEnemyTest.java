@@ -14,12 +14,13 @@ public class DefaultAttackEnemyTest {
     }
 
     @Test
-    public void playerStillAliveAndEnemyStillAlive() {
+    public void playerStillAliveAndEnemyStillAliveWithoutDamageOnPlayer() {
 
         // given
         final int initialPlayerHealth = 100;
         final int initialEnemyHealth = 100;
         final int initialEnemyDistance = 5;
+        final int minEnemyDistanceToAttack = 0;
         final int initialWeaponShots = 10;
 
         final Player player = Player.builder()
@@ -27,7 +28,7 @@ public class DefaultAttackEnemyTest {
                 .health(initialPlayerHealth)
                 .maxHealth(initialPlayerHealth)
                 .build();
-        final WeaponType weaponType = new WeaponType("", 10, 10, 20);
+        final WeaponType weaponType = new WeaponType("", 10, 10, 20, 1);
         final Weapon weapon = Weapon.builder()
                 .type(weaponType)
                 .shots(initialWeaponShots)
@@ -36,6 +37,7 @@ public class DefaultAttackEnemyTest {
                 .name("Zombie")
                 .velocity(1)
                 .damage(5)
+                .minAttackDistance(minEnemyDistanceToAttack)
                 .build();
         final Enemy enemy = Enemy.builder()
                 .type(zombie)
@@ -49,7 +51,56 @@ public class DefaultAttackEnemyTest {
         // then
         assertThat(response.getPlayer().isAlive()).isTrue();
         assertThat(response.getPlayer().getHealth())
-                .isEqualTo(initialPlayerHealth-zombie.getDamage());
+                .isEqualTo(initialPlayerHealth);
+
+        assertThat(response.getEnemy().isAlive()).isTrue();
+        assertThat(response.getEnemy().getHealth())
+                .isEqualTo(initialEnemyHealth- weapon.getType().getDamage());
+        assertThat(response.getEnemy().getDistance())
+                .isEqualTo(initialEnemyDistance);
+        assertThat(response.getWeapon().getShots())
+                .isEqualTo(initialWeaponShots-1);
+    }
+
+    @Test
+    public void playerStillAliveAndEnemyStillAliveWithDamageOnPlayer() {
+
+        // given
+        final int initialPlayerHealth = 100;
+        final int initialEnemyHealth = 100;
+        final int initialEnemyDistance = 3;
+        final int minEnemyDistanceToAttack = 5;
+        final int initialWeaponShots = 10;
+
+        final Player player = Player.builder()
+                .name("")
+                .health(initialPlayerHealth)
+                .maxHealth(initialPlayerHealth)
+                .build();
+        final WeaponType weaponType = new WeaponType("", 10, 10, 20, 1);
+        final Weapon weapon = Weapon.builder()
+                .type(weaponType)
+                .shots(initialWeaponShots)
+                .build();
+        final EnemyType zombie = EnemyType.builder()
+                .name("Zombie")
+                .velocity(1)
+                .damage(5)
+                .minAttackDistance(minEnemyDistanceToAttack)
+                .build();
+        final Enemy enemy = Enemy.builder()
+                .type(zombie)
+                .health(initialEnemyHealth)
+                .distance(initialEnemyDistance)
+                .build();
+
+        // when
+        final AttackEnemy.ResponseModel response = usecase.attack(player, weapon, enemy);
+
+        // then
+        assertThat(response.getPlayer().isAlive()).isTrue();
+        assertThat(response.getPlayer().getHealth())
+                .isEqualTo(initialPlayerHealth-response.getEnemy().getType().getDamage());
 
         assertThat(response.getEnemy().isAlive()).isTrue();
         assertThat(response.getEnemy().getHealth())
@@ -68,7 +119,7 @@ public class DefaultAttackEnemyTest {
                 .name("")
                 .health(1)
                 .build();
-        final WeaponType weaponType = new WeaponType("", 10, 10, 20);
+        final WeaponType weaponType = new WeaponType("", 10, 10, 20, 1);
         final Weapon weapon = Weapon.builder()
                 .type(weaponType)
                 .shots(10)
@@ -98,7 +149,7 @@ public class DefaultAttackEnemyTest {
                 .name("")
                 .health(100)
                 .build();
-        final WeaponType weaponType = new WeaponType("", 10, 10, 20);
+        final WeaponType weaponType = new WeaponType("", 10, 10, 20, 1);
         final Weapon weapon = Weapon.builder()
                 .type(weaponType)
                 .shots(10)

@@ -17,6 +17,10 @@ public class Enemy extends Character {
         return distance;
     }
 
+    public boolean canAttack() {
+        return distance <= type.getMinAttackDistance();
+    }
+
     public static Builder builder() {
         return new Builder();
     }

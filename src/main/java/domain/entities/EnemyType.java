@@ -5,6 +5,7 @@ public class EnemyType {
     private String name;
     private int velocity;
     private int damage;
+    private int minAttackDistance;
 
     private EnemyType() {
 
@@ -20,6 +21,10 @@ public class EnemyType {
 
     public int getDamage() {
         return damage;
+    }
+
+    public int getMinAttackDistance() {
+        return minAttackDistance;
     }
 
     public static Builder builder() {
@@ -46,6 +51,11 @@ public class EnemyType {
 
         public Builder damage(int damage) {
             instance.damage = damage;
+            return this;
+        }
+        
+        public Builder minAttackDistance(int minAttackDistance) {
+            instance.minAttackDistance = Math.max(minAttackDistance, 0);
             return this;
         }
 
