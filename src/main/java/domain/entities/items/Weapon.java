@@ -35,30 +35,37 @@ public class Weapon implements Item {
         return this.shots > 0;
     }
 
+    public void reload(int bullets) {
+        if (type.isFireGun()) {
+            this.shots = Math.min(shots + bullets, type.getShots());
+        }
+    }
+
+    // Builder
+
     public static Builder builder() {
         return new Builder();
     }
 
     public static class Builder {
 
-        protected Weapon weapon;
+        protected Weapon instance;
 
         protected Builder() {
-            weapon = new Weapon();
-        }
-
-        public Builder shots(int shots) {
-            weapon.shots = shots;
-            return this;
+            instance = new Weapon();
         }
 
         public Builder type(WeaponType type) {
-            weapon.type = type;
+            instance.type = type;
             return this;
         }
 
         public Weapon build() {
-            return weapon;
+            if (instance.type == null) {
+                throw new IllegalArgumentException("Weapon Type could not be null.");
+            }
+            instance.shots = instance.type.getShots();
+            return instance;
         }
     }
 }

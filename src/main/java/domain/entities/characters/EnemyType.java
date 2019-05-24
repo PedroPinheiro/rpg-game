@@ -1,30 +1,15 @@
 package domain.entities.characters;
 
-public class EnemyType {
+public class EnemyType extends CharacterType {
 
-    private String name;
     private int velocity;
-    private int damage;
-    private int minAttackDistance;
 
     private EnemyType() {
 
     }
 
-    public String getName() {
-        return name;
-    }
-
     public int getVelocity() {
         return velocity;
-    }
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public int getMinAttackDistance() {
-        return minAttackDistance;
     }
 
     public static Builder builder() {
@@ -44,6 +29,11 @@ public class EnemyType {
             return this;
         }
 
+        public Builder maxHealth(int maxHealth) {
+            instance.maxHealth = maxHealth;
+            return this;
+        }
+
         public Builder velocity(int velocity) {
             instance.velocity = velocity;
             return this;
@@ -53,7 +43,7 @@ public class EnemyType {
             instance.damage = damage;
             return this;
         }
-        
+
         public Builder minAttackDistance(int minAttackDistance) {
             instance.minAttackDistance = Math.max(minAttackDistance, 0);
             return this;

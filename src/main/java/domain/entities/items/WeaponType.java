@@ -1,30 +1,16 @@
 package domain.entities.items;
 
-public class WeaponType implements ItemType {
+public class WeaponType extends ItemType {
 
-    private String name;
     private int damage;
     private int range;
     private int shots;
-    private int slots;
-
-    public WeaponType(String name, int damage, int range, int shots, int slots) {
-        this.name = name;
-        this.damage = damage;
-        this.range = range;
-        this.shots = shots;
-        this.slots = slots;
-    }
-
-    public String getName() {
-        return name;
-    }
 
     public int getDamage() {
         return damage;
     }
 
-    public int getDistance() {
+    public int getRange() {
         return range;
     }
 
@@ -32,12 +18,53 @@ public class WeaponType implements ItemType {
         return shots;
     }
 
-    @Override
-    public int getSlots() {
-        return slots;
-    }
 
     public boolean isFireGun() {
         return shots > 0;
+    }
+
+
+    // Builder
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+
+        protected WeaponType instance;
+
+        protected Builder() {
+            instance = new WeaponType();
+        }
+
+        public Builder name(String name) {
+            instance.name = name;
+            return this;
+        }
+
+        public Builder slots(int slots) {
+            instance.slots = slots;
+            return this;
+        }
+
+        public Builder damage(int damage) {
+            instance.damage = damage;
+            return this;
+        }
+
+        public Builder range(int range) {
+            instance.range = range;
+            return this;
+        }
+
+        public Builder shots(int shots) {
+            instance.shots = shots;
+            return this;
+        }
+
+        public WeaponType build() {
+            return instance;
+        }
     }
 }

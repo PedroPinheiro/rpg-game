@@ -5,8 +5,8 @@ import domain.entities.backpack.Backpack;
 public class Player extends Character {
 
     private String name;
-    private int maxHealth;
     private Backpack backpack;
+    private PlayerType type;
 
     private Player() {
 
@@ -16,12 +16,16 @@ public class Player extends Character {
         return name;
     }
 
-    public int getMaxHealth() {
-        return maxHealth;
+    public Backpack getBackpack() {
+        return backpack;
+    }
+
+    public PlayerType getType() {
+        return type;
     }
 
     public void heal(int value) {
-        this.health = Math.min(health + value, maxHealth);
+        this.health = Math.min(health + value, type.getMaxHealth());
     }
 
     public static Builder builder() {
@@ -46,8 +50,8 @@ public class Player extends Character {
             return this;
         }
 
-        public Builder maxHealth(int maxHealth) {
-            player.maxHealth = maxHealth;
+        public Builder type(PlayerType type) {
+            player.type = type;
             return this;
         }
 

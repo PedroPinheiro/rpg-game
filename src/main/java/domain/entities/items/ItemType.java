@@ -1,7 +1,19 @@
 package domain.entities.items;
 
-public interface ItemType {
+public abstract class ItemType {
 
-    String getName();
-    int getSlots();
+    protected String name;
+    protected int slots;
+
+    protected ItemType() {
+
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getSlots() {
+        return slots;
+    }
 }

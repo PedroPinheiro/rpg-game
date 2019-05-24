@@ -1,27 +1,45 @@
 package domain.entities.items;
 
-public class HealthItemType implements ItemType {
+public class HealthItemType extends ItemType {
 
-    private String name;
-    private int slots;
-    private int power;
+    private int healthPower;
 
-    public HealthItemType(String name, int slots, int power) {
-        this.name = name;
-        this.slots = slots;
-        this.power = power;
+    public int getHealthPower() {
+        return healthPower;
     }
 
-    @Override
-    public String getName() {
-        return name;
+
+    // Builder
+
+    public static Builder builder() {
+        return new Builder();
     }
 
-    public int getSlots() {
-        return slots;
-    }
+    public static class Builder {
 
-    public int getPower() {
-        return power;
+        protected HealthItemType instance;
+
+        protected Builder() {
+            instance = new HealthItemType();
+        }
+
+        public Builder name(String name) {
+            instance.name = name;
+            return this;
+        }
+
+        public Builder slots(int slots) {
+            instance.slots = slots;
+            return this;
+        }
+
+        public Builder healthPower(int healthPower) {
+            instance.healthPower = healthPower;
+            return this;
+        }
+
+        public HealthItemType build() {
+            return instance;
+        }
     }
 }

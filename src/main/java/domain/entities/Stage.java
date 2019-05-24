@@ -3,7 +3,7 @@ package domain.entities;
 public class Stage {
 
     private Room firstRoom;
-    private Stage next;
+    public Stage next;
 
     public Stage(Room firstRoom, Stage next) {
         this.firstRoom = firstRoom;
@@ -14,7 +14,4 @@ public class Stage {
         return firstRoom;
     }
 
-    public Stage getNext() {
-        return next;
-    }
 }

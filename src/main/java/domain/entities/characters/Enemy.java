@@ -5,10 +5,6 @@ public class Enemy extends Character {
     private EnemyType type;
     private int distance;
 
-    private Enemy() {
-
-    }
-
     public EnemyType getType() {
         return type;
     }

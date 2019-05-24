@@ -3,6 +3,7 @@ package domain;
 import domain.entities.characters.Enemy;
 import domain.entities.characters.EnemyType;
 import domain.entities.characters.Player;
+import domain.entities.characters.PlayerType;
 import domain.entities.items.Weapon;
 import domain.entities.items.WeaponType;
 import org.junit.Test;
@@ -27,15 +28,22 @@ public class DefaultAttackEnemyTest {
         final int minEnemyDistanceToAttack = 0;
         final int initialWeaponShots = 10;
 
+        final PlayerType playerType = PlayerType.builder()
+                .maxHealth(initialPlayerHealth)
+                .build();
         final Player player = Player.builder()
                 .name("")
                 .health(initialPlayerHealth)
-                .maxHealth(initialPlayerHealth)
+                .type(playerType)
                 .build();
-        final WeaponType weaponType = new WeaponType("", 10, 10, 20, 1);
+        final WeaponType weaponType = WeaponType.builder()
+                .range(1)
+                .shots(initialWeaponShots)
+                .damage(10)
+                .range(10)
+                .build();
         final Weapon weapon = Weapon.builder()
                 .type(weaponType)
-                .shots(initialWeaponShots)
                 .build();
         final EnemyType zombie = EnemyType.builder()
                 .name("Zombie")
@@ -76,18 +84,23 @@ public class DefaultAttackEnemyTest {
         final int minEnemyDistanceToAttack = 5;
         final int initialWeaponShots = 10;
 
-        final Player player = Player.builder()
-                .name("")
-                .health(initialPlayerHealth)
+        final PlayerType playerType = PlayerType.builder()
                 .maxHealth(initialPlayerHealth)
                 .build();
-        final WeaponType weaponType = new WeaponType("", 10, 10, 20, 1);
+        final Player player = Player.builder()
+                .health(initialPlayerHealth)
+                .type(playerType)
+                .build();
+        final WeaponType weaponType = WeaponType.builder()
+                .range(1)
+                .shots(10)
+                .damage(10)
+                .range(10)
+                .build();
         final Weapon weapon = Weapon.builder()
                 .type(weaponType)
-                .shots(initialWeaponShots)
                 .build();
         final EnemyType zombie = EnemyType.builder()
-                .name("Zombie")
                 .velocity(1)
                 .damage(5)
                 .minAttackDistance(minEnemyDistanceToAttack)
@@ -120,16 +133,18 @@ public class DefaultAttackEnemyTest {
 
         // given
         final Player player = Player.builder()
-                .name("")
                 .health(1)
                 .build();
-        final WeaponType weaponType = new WeaponType("", 10, 10, 20, 1);
+        final WeaponType weaponType = WeaponType.builder()
+                .range(1)
+                .shots(10)
+                .damage(10)
+                .range(10)
+                .build();
         final Weapon weapon = Weapon.builder()
                 .type(weaponType)
-                .shots(10)
                 .build();
         final EnemyType zombie = EnemyType.builder()
-                .name("Zombie")
                 .velocity(1)
                 .damage(5)
                 .build();
@@ -150,16 +165,18 @@ public class DefaultAttackEnemyTest {
 
         // given
         final Player player = Player.builder()
-                .name("")
                 .health(100)
                 .build();
-        final WeaponType weaponType = new WeaponType("", 10, 10, 20, 1);
+        final WeaponType weaponType = WeaponType.builder()
+                .range(1)
+                .shots(10)
+                .damage(10)
+                .range(10)
+                .build();
         final Weapon weapon = Weapon.builder()
                 .type(weaponType)
-                .shots(10)
                 .build();
         final EnemyType zombie = EnemyType.builder()
-                .name("Zombie")
                 .velocity(1)
                 .damage(5)
                 .build();
