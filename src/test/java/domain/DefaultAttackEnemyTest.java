@@ -32,7 +32,6 @@ public class DefaultAttackEnemyTest {
                 .maxHealth(initialPlayerHealth)
                 .build();
         final Player player = Player.builder()
-                .name("")
                 .health(initialPlayerHealth)
                 .type(playerType)
                 .build();
@@ -46,7 +45,6 @@ public class DefaultAttackEnemyTest {
                 .type(weaponType)
                 .build();
         final EnemyType zombie = EnemyType.builder()
-                .name("Zombie")
                 .velocity(1)
                 .damage(5)
                 .minAttackDistance(minEnemyDistanceToAttack)
