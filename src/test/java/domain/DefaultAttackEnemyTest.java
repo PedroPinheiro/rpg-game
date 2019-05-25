@@ -1,11 +1,11 @@
-package domain;
+package pihead.games.rpg.engine.domain;
 
-import domain.entities.characters.Enemy;
-import domain.entities.characters.EnemyType;
-import domain.entities.characters.Player;
-import domain.entities.characters.PlayerType;
-import domain.entities.items.Weapon;
-import domain.entities.items.WeaponType;
+import pihead.games.rpg.engine.domain.entities.characters.Enemy;
+import pihead.games.rpg.engine.domain.entities.characters.EnemyType;
+import pihead.games.rpg.engine.domain.entities.characters.Player;
+import pihead.games.rpg.engine.domain.entities.characters.PlayerType;
+import pihead.games.rpg.engine.domain.entities.items.Weapon;
+import pihead.games.rpg.engine.domain.entities.items.WeaponType;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.*;
