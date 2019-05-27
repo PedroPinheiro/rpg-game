@@ -2,7 +2,7 @@ package pihead.games.rpg.engine.domain.entities.characters;
 
 public abstract class Character<T extends CharacterType> {
 
-    protected int health;
+    protected Integer health;
     private T type;
 
     protected Character() {

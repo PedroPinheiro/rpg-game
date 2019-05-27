@@ -39,35 +39,45 @@ public class Player extends Character {
 
     public static class Builder {
 
-        private Player player;
+        private Player instance;
 
         private Builder() {
-            player = new Player();
+            instance = new Player();
         }
 
         public Builder id(int id) {
-            player.id = id;
+            instance.id = id;
             return this;
         }
 
         public Builder name(String name) {
-            player.name = name;
+            instance.name = name;
             return this;
         }
 
         public Builder health(int health) {
-            player.health = health;
+            instance.health = health;
             return this;
         }
 
         public Builder type(PlayerType type) {
-            player.type = type;
+            instance.type = type;
             return this;
         }
 
         public Player build() {
-
-            return player;
+            if (instance.id == null) {
+                throw new IllegalArgumentException("Player Id could not be null.");
+            }
+            if (instance.type == null) {
+                throw new IllegalArgumentException("Player type could not be null.");
+            }
+            if (instance.health == null) {
+                instance.health = instance.type.getMaxHealth();
+            } else {
+                instance.health = Math.min(instance.health, instance.type.getMaxHealth());
+            }
+            return instance;
         }
     }
 }

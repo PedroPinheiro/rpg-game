@@ -2,6 +2,11 @@ package pihead.games.rpg.engine.domain.entities.characters;
 
 public class PlayerType extends CharacterType {
 
+    private Integer id;
+
+    public int getId() {
+        return id;
+    }
 
     public static Builder builder() {
         return new Builder();
@@ -13,6 +18,11 @@ public class PlayerType extends CharacterType {
 
         protected Builder() {
             instance = new PlayerType();
+        }
+
+        public Builder id(int id) {
+            instance.id = id;
+            return this;
         }
 
         public Builder name(String name) {
@@ -36,6 +46,9 @@ public class PlayerType extends CharacterType {
         }
 
         public PlayerType build() {
+            if (instance.id == null) {
+                throw new IllegalArgumentException("Player Type Id could not be null.");
+            }
             return instance;
         }
     }

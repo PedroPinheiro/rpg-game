@@ -11,7 +11,7 @@ public class Game {
     private Stage firstStage;
     private Stage lastStage;
     private Player player;
-    private GameType gameType;
+    private GameType type;
 
     private Game() {
     }
@@ -28,8 +28,8 @@ public class Game {
         return player;
     }
 
-    public GameType getGameType() {
-        return gameType;
+    public GameType getType() {
+        return type;
     }
 
     public void addStage(Stage stage) {
@@ -67,6 +67,11 @@ public class Game {
 
         public Builder player(Player player) {
             instance.player = player;
+            return this;
+        }
+
+        public Builder type(GameType type) {
+            instance.type = type;
             return this;
         }
 

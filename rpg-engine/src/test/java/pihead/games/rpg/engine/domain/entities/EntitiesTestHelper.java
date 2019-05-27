@@ -1,21 +1,31 @@
 package pihead.games.rpg.engine.domain.entities;
 
-import pihead.games.rpg.engine.domain.TestHelper;
 import pihead.games.rpg.engine.domain.entities.characters.Enemy;
+import pihead.games.rpg.engine.domain.entities.characters.EnemyType;
 import pihead.games.rpg.engine.domain.entities.characters.Player;
+import pihead.games.rpg.engine.domain.entities.characters.PlayerType;
 import pihead.games.rpg.engine.domain.entities.items.Weapon;
 import pihead.games.rpg.engine.domain.entities.items.WeaponType;
+
+import static pihead.games.rpg.engine.domain.TestHelper.*;
 
 public final class EntitiesTestHelper {
 
     public static Game.Builder gimmeGame() {
         return Game.builder()
-                .id(TestHelper.nextPositiveInt());
+                .id(nextPositiveInt())
+                .type(gimmeGameType().build());
+    }
+    public static GameType.Builder gimmeGameType() {
+        return GameType.builder()
+                .id(nextPositiveInt())
+                .name(nextString())
+                .description(nextString());
     }
 
     public static Weapon.Builder gimmeWeapon() {
         return Weapon.builder()
-                .id(TestHelper.nextPositiveInt())
+                .id(nextPositiveInt())
                 .type(gimmeWeaponType().build());
     }
 
@@ -23,21 +33,35 @@ public final class EntitiesTestHelper {
         final int defaultShots = 10;
         final int defaultDamage = 1;
         return WeaponType.builder()
+                .name(nextString())
                 .shots(defaultShots)
                 .damage(defaultDamage);
     }
 
     public static Enemy.Builder gimmeEnemy() {
-        int defaultHealth = 100;
         return Enemy.builder()
-                .id(TestHelper.nextPositiveInt())
-                .health(defaultHealth);
+                .id(nextPositiveInt())
+                .type(gimmeEnemyType().build());
+    }
+
+    public static EnemyType.Builder gimmeEnemyType() {
+        int defaultMaxHealth = 100;
+        return EnemyType.builder()
+                .name(nextString())
+                .maxHealth(defaultMaxHealth);
     }
 
     public static Player.Builder gimmePlayer() {
-        int defaultHealth = 100;
         return Player.builder()
-                .id(TestHelper.nextPositiveInt())
-                .health(defaultHealth);
+                .id(nextPositiveInt())
+                .type(gimmePlayerType().build());
+    }
+
+    public static PlayerType.Builder gimmePlayerType() {
+        int defaultHealth = 100;
+        return PlayerType.builder()
+                .id(nextPositiveInt())
+                .maxHealth(defaultHealth)
+                .name(nextString());
     }
 }

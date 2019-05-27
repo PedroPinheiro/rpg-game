@@ -59,6 +59,17 @@ public class Enemy extends Character {
         }
 
         public Enemy build() {
+            if (instance.id == null) {
+                throw new IllegalArgumentException("Enemy Id could not be null.");
+            }
+            if (instance.type == null) {
+                throw new IllegalArgumentException("Enemy type could not be null.");
+            }
+            if (instance.health == null) {
+                instance.health = instance.type.getMaxHealth();
+            } else {
+                instance.health = Math.min(instance.health, instance.type.getMaxHealth());
+            }
             return instance;
         }
     }
