@@ -1,26 +1,35 @@
 package pihead.games.rpg.engine.domain.entities;
 
+import pihead.games.rpg.engine.domain.entities.characters.Player;
 import pihead.games.rpg.engine.domain.entities.characters.PlayerType;
 
 import java.util.List;
 
 public class Game {
 
+    private Integer id;
     private Stage firstStage;
     private Stage lastStage;
-    private List<PlayerType> playerTypes;
+    private Player player;
+    private GameType gameType;
 
-    public Game(Stage firstStage, List<PlayerType> playerTypes) {
-        this.firstStage = firstStage;
-        this.playerTypes = playerTypes;
+    private Game() {
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public Stage getFirstStage() {
         return firstStage;
     }
 
-    public List<PlayerType> getPlayerTypes() {
-        return playerTypes;
+    private Player getPlayer() {
+        return player;
+    }
+
+    public GameType getGameType() {
+        return gameType;
     }
 
     public void addStage(Stage stage) {
@@ -35,4 +44,38 @@ public class Game {
     private boolean isFirstStage() {
         return firstStage == null;
     }
+
+
+    // Builder
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+
+        protected Game instance;
+
+        protected Builder() {
+            instance = new Game();
+        }
+
+        public Builder id(int id) {
+            instance.id = id;
+            return this;
+        }
+
+        public Builder player(Player player) {
+            instance.player = player;
+            return this;
+        }
+
+        public Game build() {
+            if (instance.id == null) {
+                throw new IllegalArgumentException("Game Id could not be null.");
+            }
+            return instance;
+        }
+    }
+
 }

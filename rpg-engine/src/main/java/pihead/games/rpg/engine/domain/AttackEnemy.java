@@ -1,61 +1,46 @@
 package pihead.games.rpg.engine.domain;
 
-import pihead.games.rpg.engine.domain.entities.characters.Enemy;
-import pihead.games.rpg.engine.domain.entities.items.Weapon;
-import pihead.games.rpg.engine.domain.entities.characters.Player;
-
 public interface AttackEnemy {
 
     ResponseModel attack(RequestModel requestModel);
 
-    default ResponseModel attack(Player player, Weapon weapon, Enemy enemy) {
-        return attack(new RequestModel(player, weapon, enemy));
+    default ResponseModel attack(int gameId, int weaponId, int enemyId) {
+        return attack(new RequestModel(gameId, weaponId, enemyId));
     }
 
     class RequestModel {
-        private Player player;
-        private Enemy enemy;
-        private Weapon weapon;
+        private int gameId;
+        private int weaponId;
+        private int enemyId;
 
-        private RequestModel(Player player, Weapon weapon, Enemy enemy) {
-            this.player = player;
-            this.weapon = weapon;
-            this.enemy = enemy;
+        public RequestModel(int gameId, int weaponId, int enemyId) {
+            this.gameId = gameId;
+            this.weaponId = weaponId;
+            this.enemyId = enemyId;
         }
 
-        public Player getPlayer() {
-            return player;
+        public int getGameId() {
+            return gameId;
         }
 
-        public Enemy getEnemy() {
-            return enemy;
+        public int getWeaponId() {
+            return weaponId;
         }
 
-        public Weapon getWeapon() {
-            return weapon;
+        public int getEnemyId() {
+            return enemyId;
         }
-
     }
 
     class ResponseModel {
-        private Player player;
-        private Enemy enemy;
-        private Weapon weapon;
+        private boolean success;
 
         private ResponseModel() {
 
         }
 
-        public Player getPlayer() {
-            return player;
-        }
-
-        public Enemy getEnemy() {
-            return enemy;
-        }
-
-        public Weapon getWeapon() {
-            return weapon;
+        public boolean isSuccess() {
+            return success;
         }
 
         public static Builder builder() {
@@ -70,18 +55,8 @@ public interface AttackEnemy {
                 model = new ResponseModel();
             }
 
-            public Builder player(Player player) {
-                model.player = player;
-                return this;
-            }
-
-            public Builder enemy(Enemy enemy) {
-                model.enemy = enemy;
-                return this;
-            }
-
-            public Builder weapon(Weapon weapon) {
-                model.weapon = weapon;
+            public Builder success(boolean success) {
+                model.success = success;
                 return this;
             }
 

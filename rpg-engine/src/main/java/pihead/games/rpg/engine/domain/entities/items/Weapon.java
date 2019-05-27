@@ -2,11 +2,16 @@ package pihead.games.rpg.engine.domain.entities.items;
 
 public class Weapon implements Item {
 
+    private int id;
     private WeaponType type;
     private int shots;
 
     protected Weapon() {
 
+    }
+
+    public int getId() {
+        return id;
     }
 
     public int getShots() {
@@ -53,6 +58,11 @@ public class Weapon implements Item {
 
         protected Builder() {
             instance = new Weapon();
+        }
+
+        public Builder id(int id) {
+            instance.id = id;
+            return this;
         }
 
         public Builder type(WeaponType type) {

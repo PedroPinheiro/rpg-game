@@ -4,12 +4,17 @@ import pihead.games.rpg.engine.domain.entities.backpack.Backpack;
 
 public class Player extends Character {
 
+    private Integer id;
     private String name;
     private Backpack backpack;
     private PlayerType type;
 
     private Player() {
 
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getName() {
@@ -38,6 +43,11 @@ public class Player extends Character {
 
         private Builder() {
             player = new Player();
+        }
+
+        public Builder id(int id) {
+            player.id = id;
+            return this;
         }
 
         public Builder name(String name) {
