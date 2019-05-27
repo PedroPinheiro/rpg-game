@@ -1,5 +1,7 @@
 package pihead.games.rpg.engine.domain.entities.backpack;
 
+import pihead.games.rpg.engine.domain.entities.backpack.exception.BackpackIsFullException;
+import pihead.games.rpg.engine.domain.entities.backpack.exception.ItemWillNotFitInBackpackException;
 import pihead.games.rpg.engine.domain.entities.items.Item;
 
 import java.util.ArrayList;

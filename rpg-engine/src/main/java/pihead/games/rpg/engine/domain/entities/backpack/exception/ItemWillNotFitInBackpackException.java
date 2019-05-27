@@ -1,4 +1,4 @@
-package pihead.games.rpg.engine.domain.entities.backpack;
+package pihead.games.rpg.engine.domain.entities.backpack.exception;
 
 import pihead.games.rpg.engine.domain.entities.items.Item;
 
