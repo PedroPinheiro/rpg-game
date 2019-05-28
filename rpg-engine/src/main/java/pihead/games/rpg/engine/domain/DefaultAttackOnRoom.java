@@ -1,37 +1,58 @@
 package pihead.games.rpg.engine.domain;
 
-import pihead.games.rpg.engine.domain.entities.Room;
-import pihead.games.rpg.engine.domain.entities.characters.Character;
-import pihead.games.rpg.engine.domain.entities.characters.Enemy;
 import pihead.games.rpg.engine.domain.entities.characters.Player;
-import pihead.games.rpg.engine.domain.entities.items.Weapon;
+import pihead.games.rpg.engine.domain.exceptions.PlayerIsNotCarringWeapon;
+import pihead.games.rpg.engine.gateway.GetPlayerGateway;
 
 public class DefaultAttackOnRoom implements AttackOnRoom {
 
+    private GetPlayerGateway getPlayerGateway;
+    private CalculateEnemiesDistances calculateEnemiesDistances;
     private AttackEnemy attackEnemy;
+    private PlayerReceiveDamage playerReceiveDamage;
 
-    public DefaultAttackOnRoom(AttackEnemy attackEnemy) {
+    public DefaultAttackOnRoom(GetPlayerGateway getPlayerGateway,
+                               CalculateEnemiesDistances calculateEnemiesDistances,
+                               AttackEnemy attackEnemy,
+                               PlayerReceiveDamage playerReceiveDamage) {
+        this.getPlayerGateway = getPlayerGateway;
+        this.calculateEnemiesDistances = calculateEnemiesDistances;
         this.attackEnemy = attackEnemy;
+        this.playerReceiveDamage = playerReceiveDamage;
     }
 
     @Override
-    public ResponseModel execute(RequestModel requestModel) {
+    public ResponseModel attack(RequestModel requestModel) throws PlayerIsNotCarringWeapon {
 
-        Room room = requestModel.getRoom();
-        Player player = requestModel.getPlayer();
-        Weapon weapon = requestModel.getWeapon();
-        Enemy enemy = requestModel.getEnemy();
+        final Player player = getPlayer(requestModel);
 
-//        attackEnemy.attack(player, weapon, enemy);
+        attackEnemy(requestModel, player);
 
-        progressEnemies(room);
+        calculateEnemiesDistances.calculate(requestModel.getRoomId());
+
+        playerReceiveDamage(requestModel);
 
         return null;
     }
 
-    private void progressEnemies(Room room) {
-        room.getEnemies().stream()
-                .filter(Character::isAlive)
-                .forEach(Enemy::progressDistance);
+    private void attackEnemy(RequestModel requestModel, Player player) throws PlayerIsNotCarringWeapon {
+
+        if (!player.isCarryingWeapon()) {
+            throw new PlayerIsNotCarringWeapon();
+        }
+
+        attackEnemy.attack(player.getWeapon().getId(),
+                requestModel.getChosenEnemyId());
+    }
+
+    private void playerReceiveDamage(RequestModel requestModel) {
+        playerReceiveDamage.receiveDamage(requestModel.getGameId(),
+                requestModel.getPlayerId(),
+                requestModel.getRoomId());
+    }
+
+    private Player getPlayer(RequestModel requestModel) {
+        return getPlayerGateway.getById(requestModel.getPlayerId())
+                .orElseThrow(() -> new RuntimeException("Player not found"));
     }
 }

@@ -64,4 +64,11 @@ public final class EntitiesTestHelper {
                 .maxHealth(defaultHealth)
                 .name(nextString());
     }
+
+    public static Room.Builder gimmeRoom() {
+        return Room.builder()
+                .id(nextPositiveInt())
+                .name(nextString())
+                .description(nextString());
+    }
 }

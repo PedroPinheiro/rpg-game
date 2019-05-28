@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
 import static pihead.games.rpg.engine.domain.entities.EntitiesTestHelper.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DefaultAttackEnemyTestHelper {
+public class DefaultAttackEnemyTest {
 
     private AttackEnemy usecase;
     @Mock
@@ -46,7 +46,6 @@ public class DefaultAttackEnemyTestHelper {
     public void enemyStillAlive() {
 
         // given
-        final Game game = gimmeGame().build();
         final WeaponType weaponType = gimmeWeaponType().build();
         final Weapon weapon = gimmeWeapon().type(weaponType).build();
         final Enemy enemy = gimmeEnemy().build();
@@ -54,12 +53,11 @@ public class DefaultAttackEnemyTestHelper {
         final int initialEnemyHealth = enemy.getHealth();
         final int initialWeaponShots = weapon.getShots();
 
-        when(getGameGateway.getById(game.getId())).thenReturn(Optional.of(game));
         when(getWeaponGateway.getById(weapon.getId())).thenReturn(Optional.of(weapon));
         when(getEnemyGateway.getById(enemy.getId())).thenReturn(Optional.of(enemy));
 
         // when
-        usecase.attack(game.getId(), weapon.getId(), enemy.getId());
+        usecase.attack(weapon.getId(), enemy.getId());
 
         // then
         assertThat(enemy.isAlive()).isTrue();
@@ -77,19 +75,17 @@ public class DefaultAttackEnemyTestHelper {
         // given
         final int enemyHealth = 1;
 
-        final Game game = gimmeGame().build();
         final WeaponType weaponType = gimmeWeaponType().damage(enemyHealth).build();
         final Weapon weapon = gimmeWeapon().type(weaponType).build();
         final Enemy enemy = gimmeEnemy().health(enemyHealth).build();
 
         final int initialWeaponShots = weapon.getShots();
 
-        when(getGameGateway.getById(game.getId())).thenReturn(Optional.of(game));
         when(getWeaponGateway.getById(weapon.getId())).thenReturn(Optional.of(weapon));
         when(getEnemyGateway.getById(enemy.getId())).thenReturn(Optional.of(enemy));
 
         // when
-        usecase.attack(game.getId(), weapon.getId(), enemy.getId());
+        usecase.attack(weapon.getId(), enemy.getId());
 
         // then
         assertThat(enemy.isAlive()).isFalse();
@@ -99,29 +95,29 @@ public class DefaultAttackEnemyTestHelper {
         verify(updateWeaponGateway, only()).updateWeapon(weapon);
         verify(updateEnemyGateway, only()).updateEnemy(enemy);
     }
-
-    @Test
-    public void gameNotFound() {
-
-        // given
-        final int gameId = 1;
-        final WeaponType weaponType = gimmeWeaponType().build();
-        final Weapon weapon = gimmeWeapon().type(weaponType).build();
-        final Enemy enemy = gimmeEnemy().build();
-
-        when(getGameGateway.getById(gameId)).thenReturn(Optional.empty()); // return null game
-
-        // when
-        Throwable thrown = catchThrowable(() ->
-             usecase.attack(gameId, weapon.getId(), enemy.getId())
-        );
-
-        // then
-        assertThat(thrown)
-                .isInstanceOf(RuntimeException.class)
-                .hasNoCause()
-                .hasMessage("Game not found");
-    }
+//
+//    @Test
+//    public void gameNotFound() {
+//
+//        // given
+//        final int gameId = 1;
+//        final WeaponType weaponType = gimmeWeaponType().build();
+//        final Weapon weapon = gimmeWeapon().type(weaponType).build();
+//        final Enemy enemy = gimmeEnemy().build();
+//
+//        when(getGameGateway.getById(gameId)).thenReturn(Optional.empty()); // return null game
+//
+//        // when
+//        Throwable thrown = catchThrowable(() ->
+//             usecase.attack(weapon.getId(), enemy.getId())
+//        );
+//
+//        // then
+//        assertThat(thrown)
+//                .isInstanceOf(RuntimeException.class)
+//                .hasNoCause()
+//                .hasMessage("Game not found");
+//    }
 
     @Test
     public void weaponNotFound() {
@@ -131,12 +127,11 @@ public class DefaultAttackEnemyTestHelper {
         final int weaponId = 1;
         final Enemy enemy = gimmeEnemy().build();
 
-        when(getGameGateway.getById(game.getId())).thenReturn(Optional.of(game));
         when(getWeaponGateway.getById(weaponId)).thenReturn(Optional.empty());
 
         // when
         Throwable thrown = catchThrowable(() ->
-                usecase.attack(game.getId(), weaponId, enemy.getId())
+                usecase.attack(weaponId, enemy.getId())
         );
 
         // then
@@ -155,13 +150,12 @@ public class DefaultAttackEnemyTestHelper {
         final Weapon weapon = gimmeWeapon().type(weaponType).build();
         final int enemyId = 1;
 
-        when(getGameGateway.getById(game.getId())).thenReturn(Optional.of(game));
         when(getWeaponGateway.getById(weapon.getId())).thenReturn(Optional.of(weapon));
         when(getEnemyGateway.getById(enemyId)).thenReturn(Optional.empty());  // return null enemy
 
         // when
         Throwable thrown = catchThrowable(() ->
-                usecase.attack(game.getId(), weapon.getId(),enemyId)
+                usecase.attack(weapon.getId(),enemyId)
         );
 
         // then

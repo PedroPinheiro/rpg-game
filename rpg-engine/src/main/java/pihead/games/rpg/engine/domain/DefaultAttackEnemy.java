@@ -28,7 +28,6 @@ public class DefaultAttackEnemy implements AttackEnemy {
     @Override
     public ResponseModel attack(RequestModel requestModel) {
 
-        Game game = getGame(requestModel);
         Weapon weapon = getWeapon(requestModel);
         Enemy enemy = getEnemy(requestModel);
 
@@ -41,11 +40,6 @@ public class DefaultAttackEnemy implements AttackEnemy {
         return ResponseModel.builder()
                 .success(true)
                 .build();
-    }
-
-    private Game getGame(RequestModel requestModel) {
-        return getGameGateway.getById(requestModel.getGameId())
-                .orElseThrow(() -> new RuntimeException("Game not found"));
     }
 
     private Weapon getWeapon(RequestModel requestModel) {

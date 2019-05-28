@@ -4,23 +4,17 @@ public interface AttackEnemy {
 
     ResponseModel attack(RequestModel requestModel);
 
-    default ResponseModel attack(int gameId, int weaponId, int enemyId) {
-        return attack(new RequestModel(gameId, weaponId, enemyId));
+    default ResponseModel attack(int weaponId, int enemyId) {
+        return attack(new RequestModel(weaponId, enemyId));
     }
 
     class RequestModel {
-        private int gameId;
         private int weaponId;
         private int enemyId;
 
-        public RequestModel(int gameId, int weaponId, int enemyId) {
-            this.gameId = gameId;
+        public RequestModel(int weaponId, int enemyId) {
             this.weaponId = weaponId;
             this.enemyId = enemyId;
-        }
-
-        public int getGameId() {
-            return gameId;
         }
 
         public int getWeaponId() {

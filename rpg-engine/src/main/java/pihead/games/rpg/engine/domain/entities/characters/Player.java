@@ -1,6 +1,7 @@
 package pihead.games.rpg.engine.domain.entities.characters;
 
 import pihead.games.rpg.engine.domain.entities.backpack.Backpack;
+import pihead.games.rpg.engine.domain.entities.items.Weapon;
 
 public class Player extends Character {
 
@@ -8,6 +9,7 @@ public class Player extends Character {
     private String name;
     private Backpack backpack;
     private PlayerType type;
+    private Weapon weapon;
 
     private Player() {
 
@@ -29,9 +31,23 @@ public class Player extends Character {
         return type;
     }
 
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
     public void heal(int value) {
         this.health = Math.min(health + value, type.getMaxHealth());
     }
+
+    public void chooseWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
+
+    public boolean isCarryingWeapon() {
+        return weapon != null;
+    }
+
+    // Builder
 
     public static Builder builder() {
         return new Builder();
