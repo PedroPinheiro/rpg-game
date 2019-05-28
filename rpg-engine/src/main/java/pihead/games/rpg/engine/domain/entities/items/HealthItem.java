@@ -2,10 +2,16 @@ package pihead.games.rpg.engine.domain.entities.items;
 
 public class HealthItem implements Item {
 
+    private int id;
     private HealthItemType type;
 
     public HealthItem() {
 
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 
     @Override
@@ -25,6 +31,11 @@ public class HealthItem implements Item {
 
         protected Builder() {
             instance = new HealthItem();
+        }
+
+        public Builder id(int id) {
+            instance.id = id;
+            return this;
         }
 
         public Builder type(HealthItemType type) {

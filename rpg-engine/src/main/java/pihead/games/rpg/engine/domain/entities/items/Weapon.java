@@ -26,10 +26,6 @@ public class Weapon implements Item {
         return type.getName();
     }
 
-    public int getDamage() {
-        return type.getDamage();
-    }
-
     public void shoot() {
         if (canShoot() && type.isFireGun()) {
             this.shots--;

@@ -8,6 +8,7 @@ public class RoomSide {
 
     private Direction side;
     private List<Item> items;
+    private Room nextRoom;
 
     public RoomSide(Direction side, List<Item> items) {
         this.side = side;
@@ -24,5 +25,9 @@ public class RoomSide {
 
     public List<Item> getItems() {
         return items;
+    }
+
+    public Room getNextRoom() {
+        return nextRoom;
     }
 }
