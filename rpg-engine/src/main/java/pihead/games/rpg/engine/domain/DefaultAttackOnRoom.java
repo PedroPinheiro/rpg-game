@@ -1,7 +1,7 @@
 package pihead.games.rpg.engine.domain;
 
 import pihead.games.rpg.engine.domain.entities.characters.Player;
-import pihead.games.rpg.engine.domain.exceptions.PlayerIsNotCarringWeapon;
+import pihead.games.rpg.engine.domain.exceptions.PlayerIsNotCarryingWeapon;
 import pihead.games.rpg.engine.gateway.GetPlayerGateway;
 
 public class DefaultAttackOnRoom implements AttackOnRoom {
@@ -22,7 +22,7 @@ public class DefaultAttackOnRoom implements AttackOnRoom {
     }
 
     @Override
-    public void attack(RequestModel requestModel) throws PlayerIsNotCarringWeapon {
+    public void attack(RequestModel requestModel) throws PlayerIsNotCarryingWeapon {
 
         final Player player = getPlayer(requestModel);
 
@@ -34,10 +34,10 @@ public class DefaultAttackOnRoom implements AttackOnRoom {
 
     }
 
-    private void attackEnemy(RequestModel requestModel, Player player) throws PlayerIsNotCarringWeapon {
+    private void attackEnemy(RequestModel requestModel, Player player) throws PlayerIsNotCarryingWeapon {
 
         if (!player.isCarryingWeapon()) {
-            throw new PlayerIsNotCarringWeapon();
+            throw new PlayerIsNotCarryingWeapon();
         }
 
         attackEnemy.attack(player.getWeapon().getId(),

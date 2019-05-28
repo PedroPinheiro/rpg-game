@@ -6,11 +6,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import pihead.games.rpg.engine.domain.entities.Game;
-import pihead.games.rpg.engine.domain.entities.characters.Enemy;
 import pihead.games.rpg.engine.domain.entities.characters.Player;
 import pihead.games.rpg.engine.domain.entities.items.Weapon;
-import pihead.games.rpg.engine.domain.entities.items.WeaponType;
-import pihead.games.rpg.engine.domain.exceptions.PlayerIsNotCarringWeapon;
+import pihead.games.rpg.engine.domain.exceptions.PlayerIsNotCarryingWeapon;
 import pihead.games.rpg.engine.gateway.*;
 
 import java.util.Optional;
@@ -86,7 +84,7 @@ public class DefaultAttackOnRoomTest {
         });
 
         // then
-        assertThat(thrown).isInstanceOf(PlayerIsNotCarringWeapon.class);
+        assertThat(thrown).isInstanceOf(PlayerIsNotCarryingWeapon.class);
 
     }
 

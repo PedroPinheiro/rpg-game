@@ -1,12 +1,12 @@
 package pihead.games.rpg.engine.domain;
 
-import pihead.games.rpg.engine.domain.exceptions.PlayerIsNotCarringWeapon;
+import pihead.games.rpg.engine.domain.exceptions.PlayerIsNotCarryingWeapon;
 
 public interface AttackOnRoom {
 
-    void attack(RequestModel requestModel) throws PlayerIsNotCarringWeapon;
+    void attack(RequestModel requestModel) throws PlayerIsNotCarryingWeapon;
 
-    default void attack(int gameId, int roomId, int playerId, int chosenEnemyId) throws PlayerIsNotCarringWeapon {
+    default void attack(int gameId, int roomId, int playerId, int chosenEnemyId) throws PlayerIsNotCarryingWeapon {
         attack(new RequestModel(gameId, roomId, playerId, chosenEnemyId));
     }
 
