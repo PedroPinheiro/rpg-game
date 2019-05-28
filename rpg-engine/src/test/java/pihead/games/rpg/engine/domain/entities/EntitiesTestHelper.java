@@ -1,11 +1,7 @@
 package pihead.games.rpg.engine.domain.entities;
 
-import pihead.games.rpg.engine.domain.entities.characters.Enemy;
-import pihead.games.rpg.engine.domain.entities.characters.EnemyType;
-import pihead.games.rpg.engine.domain.entities.characters.Player;
-import pihead.games.rpg.engine.domain.entities.characters.PlayerType;
-import pihead.games.rpg.engine.domain.entities.items.Weapon;
-import pihead.games.rpg.engine.domain.entities.items.WeaponType;
+import pihead.games.rpg.engine.domain.entities.characters.*;
+import pihead.games.rpg.engine.domain.entities.items.*;
 
 import static pihead.games.rpg.engine.domain.TestHelper.*;
 
@@ -71,6 +67,31 @@ public final class EntitiesTestHelper {
         return Room.builder()
                 .id(nextPositiveInt())
                 .name(nextString())
+                .description(nextString())
+                .addEnemy(gimmeEnemy().build())
+                .addEnemy(gimmeEnemy().build())
+                .addItem(RoomSide.Direction.LEFT, gimmeHealthItem().build())
+                .addItem(RoomSide.Direction.RIGHT, gimmeWeapon().build())
+                .addNextRoom(RoomSide.Direction.FRONT, gimmeEmptyRoom().build());
+    }
+
+    public static Room.Builder gimmeEmptyRoom() {
+        return Room.builder()
+                .id(nextPositiveInt())
+                .name(nextString())
                 .description(nextString());
+    }
+
+    public static HealthItem.Builder gimmeHealthItem() {
+        return HealthItem.builder()
+                .id(nextPositiveInt())
+                .type(gimmeHealthItemType().build());
+    }
+
+    public static HealthItemType.Builder gimmeHealthItemType() {
+        int defaultHealthPower = 10;
+        return HealthItemType.builder()
+                .name(nextString())
+                .healthPower(defaultHealthPower);
     }
 }

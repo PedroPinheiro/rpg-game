@@ -7,6 +7,7 @@ import pihead.games.rpg.engine.domain.entities.items.HealthItem;
 import pihead.games.rpg.engine.domain.entities.items.Weapon;
 import pihead.games.rpg.engine.gateway.GetRoomGateway;
 
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class DefaultEnterRoom implements EnterRoom {
@@ -54,9 +55,9 @@ public class DefaultEnterRoom implements EnterRoom {
                     enemy.getHealth());
     }
 
-    private Consumer<RoomSide> addSideToResponse(ResponseModel.Builder builder) {
-        return (side) -> {
-            ResponseModel.RoomSideModel modelSide = getSideModel(side);
+    private BiConsumer<RoomSide.Direction, RoomSide> addSideToResponse(ResponseModel.Builder builder) {
+        return (direction, side) -> {
+            ResponseModel.RoomSideModel modelSide = getSideModel(direction);
             addItemsToResponse(builder, side, modelSide);
             addNextRoomsToResponse(builder, side, modelSide);
         };
@@ -94,14 +95,10 @@ public class DefaultEnterRoom implements EnterRoom {
         }
     }
 
-    private ResponseModel.RoomSideModel getSideModel(RoomSide side) {
-
-        RoomSide.Direction side1 = side.getSide();
+    private ResponseModel.RoomSideModel getSideModel(RoomSide.Direction direction) {
 
         ResponseModel.RoomSideModel result = ResponseModel.RoomSideModel.FRONT;
-
-        switch (side1) {
-
+        switch (direction) {
             case LEFT:
                 result = ResponseModel.RoomSideModel.LEFT;
                 break;
@@ -114,6 +111,5 @@ public class DefaultEnterRoom implements EnterRoom {
         }
 
         return result;
-
     }
 }

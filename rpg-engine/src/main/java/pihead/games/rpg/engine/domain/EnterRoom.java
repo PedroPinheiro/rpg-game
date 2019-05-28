@@ -9,18 +9,15 @@ public interface EnterRoom {
 
     ResponseModel enter(RequestModel requestModel);
 
+    default ResponseModel enter(int roomId) {
+        return enter(new RequestModel(roomId));
+    }
 
     class RequestModel {
-        private int gameId;
         private int roomId;
 
-        public RequestModel(int gameId, int roomId) {
-            this.gameId = gameId;
+        public RequestModel(int roomId) {
             this.roomId = roomId;
-        }
-
-        public int getGameId() {
-            return gameId;
         }
 
         public int getRoomId() {
@@ -52,9 +49,6 @@ public interface EnterRoom {
                 instance = new ResponseModel();
                 instance.enemies = new ArrayList<>();
                 instance.items = new HashMap<>();
-                instance.items.put(RoomSideModel.LEFT, new ArrayList<>());
-                instance.items.put(RoomSideModel.RIGHT, new ArrayList<>());
-                instance.items.put(RoomSideModel.FRONT, new ArrayList<>());
                 instance.nextRooms = new HashMap<>();
             }
 
@@ -75,14 +69,22 @@ public interface EnterRoom {
 
             public Builder addHealthItem(RoomSideModel side, int id, String name, int healthPower) {
                 ItemModel itemModel = new ItemModel(id, name, ItemTypeModel.HEALTH, 0, healthPower);
+                ensureItemSideCreated(side);
                 instance.items.get(side).add(itemModel);
                 return this;
             }
 
             public Builder addWeapon(RoomSideModel side, int id, String name, int weaponDamage) {
                 ItemModel itemModel = new ItemModel(id, name, ItemTypeModel.WEAPON, weaponDamage, 0);
+                ensureItemSideCreated(side);
                 instance.items.get(side).add(itemModel);
                 return this;
+            }
+
+            private void ensureItemSideCreated(RoomSideModel side) {
+                if (!instance.items.containsKey(side)){
+                    instance.items.put(side, new ArrayList<>());
+                }
             }
 
             public Builder addNextRoom(RoomSideModel side, int id, String name) {

@@ -1,9 +1,12 @@
 package pihead.games.rpg.engine.domain.entities;
 
 import pihead.games.rpg.engine.domain.entities.characters.Enemy;
+import pihead.games.rpg.engine.domain.entities.items.Item;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Room {
 
@@ -11,7 +14,7 @@ public class Room {
     private String name;
     private String description;
     private List<Enemy> enemies;
-    private List<RoomSide> sides;
+    private Map<RoomSide.Direction, RoomSide> sides;
     private List<Room> next;
     private Room previous;
 
@@ -35,7 +38,7 @@ public class Room {
         return enemies;
     }
 
-    public List<RoomSide> getSides() {
+    public Map<RoomSide.Direction, RoomSide> getSides() {
         return sides;
     }
 
@@ -56,11 +59,22 @@ public class Room {
 
     public static class Builder {
 
-        protected Room instance;
+        private Room instance;
+        private Map<RoomSide.Direction, RoomSide.Builder> sides;
 
-        protected Builder() {
+        private Builder() {
             instance = new Room();
             instance.enemies = new ArrayList<>();
+            sides = new HashMap<>();
+            addRoomSide(RoomSide.Direction.LEFT);
+            addRoomSide(RoomSide.Direction.RIGHT);
+            addRoomSide(RoomSide.Direction.FRONT);
+        }
+
+        private void addRoomSide(RoomSide.Direction direction) {
+            RoomSide.Builder roomSideBuilder = RoomSide.builder()
+                    .direction(direction);
+            sides.put(direction, roomSideBuilder);
         }
 
         public Builder id(int id) {
@@ -83,10 +97,27 @@ public class Room {
             return this;
         }
 
+        public Builder addItem(RoomSide.Direction direction, Item item) {
+            sides.get(direction).addItem(item);
+            return this;
+        }
+
+        public Builder addNextRoom(RoomSide.Direction direction, Room room) {
+            sides.get(direction).nextRoom(room);
+            return this;
+        }
+
         public Room build() {
             if (instance.id == null) {
                 throw new IllegalArgumentException("Room Id could not be null.");
             }
+
+            // add sides of the room
+            instance.sides = new HashMap<>();
+            sides.forEach((direction, roomSideBuilder) ->
+                instance.sides.put(direction, roomSideBuilder.build())
+            );
+
             return instance;
         }
     }
