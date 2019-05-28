@@ -65,7 +65,7 @@ public class DefaultAttackOnRoomTest {
 
         verify(calculateEnemiesDistances, only()).calculate(roomId);
         verify(attackEnemy, only()).attack(weapon.getId(), chosenEnemyId);
-        verify(playerReceiveDamage, only()).receiveDamage(gameId, player.getId(), roomId);
+        verify(playerReceiveDamage, only()).receiveDamage(player.getId(), roomId);
 
     }
 
@@ -75,8 +75,8 @@ public class DefaultAttackOnRoomTest {
         // given
         final Player player = gimmePlayer().build();
         final Game game = gimmeGame().player(player).build();
-        int roomId = 1;
-        int chosenEnemyId = 1;
+        int roomId = nextPositiveInt();
+        int chosenEnemyId = nextPositiveInt();
 
         when(getPlayerGateway.getById(player.getId())).thenReturn(Optional.of(player));
 
@@ -87,6 +87,28 @@ public class DefaultAttackOnRoomTest {
 
         // then
         assertThat(thrown).isInstanceOf(PlayerIsNotCarringWeapon.class);
+
+    }
+
+    @Test
+    public void playerNotFound() {
+
+        // given
+        final int playerId = nextPositiveInt();
+        final int gameId = nextPositiveInt();
+        int roomId = nextPositiveInt();
+        int chosenEnemyId = nextPositiveInt();
+
+        when(getPlayerGateway.getById(playerId)).thenReturn(Optional.empty());
+
+        // when
+        Throwable thrown = catchThrowable(() -> {
+            usecase.attack(gameId, roomId, playerId, chosenEnemyId);
+        });
+
+        // then
+        assertThat(thrown).isExactlyInstanceOf(RuntimeException.class)
+            .hasMessage("Player not found");
 
     }
 

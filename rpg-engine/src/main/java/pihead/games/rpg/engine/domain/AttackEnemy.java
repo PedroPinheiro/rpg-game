@@ -2,10 +2,10 @@ package pihead.games.rpg.engine.domain;
 
 public interface AttackEnemy {
 
-    ResponseModel attack(RequestModel requestModel);
+    void attack(RequestModel requestModel);
 
-    default ResponseModel attack(int weaponId, int enemyId) {
-        return attack(new RequestModel(weaponId, enemyId));
+    default void attack(int weaponId, int enemyId) {
+        attack(new RequestModel(weaponId, enemyId));
     }
 
     class RequestModel {
@@ -26,38 +26,4 @@ public interface AttackEnemy {
         }
     }
 
-    class ResponseModel {
-        private boolean success;
-
-        private ResponseModel() {
-
-        }
-
-        public boolean isSuccess() {
-            return success;
-        }
-
-        public static Builder builder() {
-            return new Builder();
-        }
-
-        public static class Builder {
-
-            private ResponseModel model;
-
-            private Builder() {
-                model = new ResponseModel();
-            }
-
-            public Builder success(boolean success) {
-                model.success = success;
-                return this;
-            }
-
-            public ResponseModel build() {
-                return model;
-            }
-        }
-
-    }
 }

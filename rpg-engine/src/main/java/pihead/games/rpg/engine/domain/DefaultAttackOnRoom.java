@@ -22,7 +22,7 @@ public class DefaultAttackOnRoom implements AttackOnRoom {
     }
 
     @Override
-    public ResponseModel attack(RequestModel requestModel) throws PlayerIsNotCarringWeapon {
+    public void attack(RequestModel requestModel) throws PlayerIsNotCarringWeapon {
 
         final Player player = getPlayer(requestModel);
 
@@ -32,7 +32,6 @@ public class DefaultAttackOnRoom implements AttackOnRoom {
 
         playerReceiveDamage(requestModel);
 
-        return null;
     }
 
     private void attackEnemy(RequestModel requestModel, Player player) throws PlayerIsNotCarringWeapon {
@@ -46,7 +45,7 @@ public class DefaultAttackOnRoom implements AttackOnRoom {
     }
 
     private void playerReceiveDamage(RequestModel requestModel) {
-        playerReceiveDamage.receiveDamage(requestModel.getGameId(),
+        playerReceiveDamage.receiveDamage(
                 requestModel.getPlayerId(),
                 requestModel.getRoomId());
     }

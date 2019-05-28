@@ -46,9 +46,11 @@ public final class EntitiesTestHelper {
 
     public static EnemyType.Builder gimmeEnemyType() {
         int defaultMaxHealth = 100;
+        int defaultDamage = 10;
         return EnemyType.builder()
                 .name(nextString())
-                .maxHealth(defaultMaxHealth);
+                .maxHealth(defaultMaxHealth)
+                .damage(defaultDamage);
     }
 
     public static Player.Builder gimmePlayer() {

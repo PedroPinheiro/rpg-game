@@ -4,23 +4,17 @@ public interface PlayerReceiveDamage {
 
     void receiveDamage(RequestModel requestModel);
 
-    default void receiveDamage(int gameId, int playerId, int roomId) {
-        receiveDamage(new RequestModel(gameId, playerId, roomId));
+    default void receiveDamage(int playerId, int roomId) {
+        receiveDamage(new RequestModel(playerId, roomId));
     }
 
     class RequestModel {
-        private int gameId;
         private int playerId;
         private int roomId;
 
-        public RequestModel(int gameId, int playerId, int roomId) {
-            this.gameId = gameId;
+        public RequestModel(int playerId, int roomId) {
             this.playerId = playerId;
             this.roomId = roomId;
-        }
-
-        public int getGameId() {
-            return gameId;
         }
 
         public int getPlayerId() {

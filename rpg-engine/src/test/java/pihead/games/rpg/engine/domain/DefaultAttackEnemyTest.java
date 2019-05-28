@@ -23,8 +23,6 @@ public class DefaultAttackEnemyTest {
 
     private AttackEnemy usecase;
     @Mock
-    private GetGameGateway getGameGateway;
-    @Mock
     private GetWeaponGateway getWeaponGateway;
     @Mock
     private GetEnemyGateway getEnemyGateway;
@@ -35,8 +33,7 @@ public class DefaultAttackEnemyTest {
 
     @Before
     public void setUp() {
-        usecase = new DefaultAttackEnemy(getGameGateway,
-                getWeaponGateway,
+        usecase = new DefaultAttackEnemy(getWeaponGateway,
                 getEnemyGateway,
                 updateWeaponGateway,
                 updateEnemyGateway);

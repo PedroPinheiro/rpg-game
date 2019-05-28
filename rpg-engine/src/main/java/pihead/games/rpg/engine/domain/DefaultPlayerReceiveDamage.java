@@ -31,11 +31,12 @@ public class DefaultPlayerReceiveDamage implements PlayerReceiveDamage {
                 .filter(Enemy::canAttack)
                 .forEach(enemy -> processEnemyDamage(enemy, player));
 
+        updatePlayerGateway.updatePlayer(player);
+
     }
 
     private void processEnemyDamage(Enemy enemy, Player player) {
         player.receiveDamage(enemy.getType().getDamage());
-        updatePlayerGateway.updatePlayer(player);
     }
 
     private Room getRoom(RequestModel requestModel) {

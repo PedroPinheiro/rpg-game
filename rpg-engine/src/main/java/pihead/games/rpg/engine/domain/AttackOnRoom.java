@@ -4,10 +4,10 @@ import pihead.games.rpg.engine.domain.exceptions.PlayerIsNotCarringWeapon;
 
 public interface AttackOnRoom {
 
-    ResponseModel attack(RequestModel requestModel) throws PlayerIsNotCarringWeapon;
+    void attack(RequestModel requestModel) throws PlayerIsNotCarringWeapon;
 
-    default ResponseModel attack(int gameId, int roomId, int playerId, int chosenEnemyId) throws PlayerIsNotCarringWeapon {
-        return attack(new RequestModel(gameId, roomId, playerId, chosenEnemyId));
+    default void attack(int gameId, int roomId, int playerId, int chosenEnemyId) throws PlayerIsNotCarringWeapon {
+        attack(new RequestModel(gameId, roomId, playerId, chosenEnemyId));
     }
 
     class RequestModel {
@@ -41,38 +41,4 @@ public interface AttackOnRoom {
 
     }
 
-    class ResponseModel {
-        private boolean success;
-
-        private ResponseModel() {
-
-        }
-
-        public boolean isSuccess() {
-            return success;
-        }
-
-        public static Builder builder() {
-            return new Builder();
-        }
-
-        public static class Builder {
-
-            private ResponseModel model;
-
-            private Builder() {
-                model = new ResponseModel();
-            }
-
-            public Builder success(boolean success) {
-                model.success = success;
-                return this;
-            }
-
-            public ResponseModel build() {
-                return model;
-            }
-        }
-
-    }
 }
