@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import pihead.games.rpg.engine.domain.entities.Room;
+import pihead.games.rpg.engine.domain.entities.RoomSide;
 import pihead.games.rpg.engine.gateway.GetRoomGateway;
 
 import java.util.Optional;
@@ -13,8 +14,9 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.Mockito.when;
-import static pihead.games.rpg.engine.domain.TestHelper.nextPositiveInt;
-import static pihead.games.rpg.engine.domain.entities.EntitiesTestHelper.gimmeRoom;
+import static pihead.games.rpg.engine.domain.TestHelper.*;
+import static pihead.games.rpg.engine.domain.assertions.EnterRoomResponseAssertion.assertThatEnterRoomResponse;
+import static pihead.games.rpg.engine.domain.entities.EntitiesTestHelper.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DefaultEnterRoomTest {
@@ -30,10 +32,14 @@ public class DefaultEnterRoomTest {
     }
 
     @Test
-    public void success() {
+    public void leftOneItemRightOneItemFrontNextRoom() {
 
         // given
-        Room room = gimmeRoom().build();
+        Room room = gimmeRoom()
+                .addItem(RoomSide.Direction.LEFT, gimmeHealthItem().build())
+                .addItem(RoomSide.Direction.RIGHT, gimmeWeapon().build())
+                .addNextRoom(RoomSide.Direction.FRONT, gimmeEmptyRoom().build())
+                .build();
 
         when(getRoomGateway.getById(room.getId())).thenReturn(Optional.of(room));
 
@@ -41,7 +47,42 @@ public class DefaultEnterRoomTest {
         EnterRoom.ResponseModel responseModel = usecase.enter(room.getId());
 
         // then
-        int i = 1;
+        assertThat(responseModel.getRoomId()).isEqualTo(room.getId());
+        assertThat(responseModel.getRoomName()).isEqualTo(room.getName());
+
+        assertThatEnterRoomResponse(responseModel).hasEnemiesOf(room);
+        assertThatEnterRoomResponse(responseModel).hasItemsOf(room);
+        assertThatEnterRoomResponse(responseModel).hasNextRoomsOf(room);
+
+    }
+    @Test
+    public void leftThreeItemRightThreeItemFrontThreeItem() {
+
+        // given
+        Room room = gimmeRoom()
+                .addItem(RoomSide.Direction.LEFT, gimmeHealthItem().build())
+                .addItem(RoomSide.Direction.LEFT, gimmeHealthItem().build())
+                .addItem(RoomSide.Direction.LEFT, gimmeHealthItem().build())
+                .addItem(RoomSide.Direction.RIGHT, gimmeWeapon().build())
+                .addItem(RoomSide.Direction.RIGHT, gimmeWeapon().build())
+                .addItem(RoomSide.Direction.RIGHT, gimmeWeapon().build())
+                .addItem(RoomSide.Direction.FRONT, gimmeWeapon().build())
+                .addItem(RoomSide.Direction.FRONT, gimmeWeapon().build())
+                .addItem(RoomSide.Direction.FRONT, gimmeWeapon().build())
+                .build();
+
+        when(getRoomGateway.getById(room.getId())).thenReturn(Optional.of(room));
+
+        // when
+        EnterRoom.ResponseModel responseModel = usecase.enter(room.getId());
+
+        // then
+        assertThat(responseModel.getRoomId()).isEqualTo(room.getId());
+        assertThat(responseModel.getRoomName()).isEqualTo(room.getName());
+
+        assertThatEnterRoomResponse(responseModel).hasEnemiesOf(room);
+        assertThatEnterRoomResponse(responseModel).hasItemsOf(room);
+        assertThatEnterRoomResponse(responseModel).hasNextRoomsOf(room);
 
     }
 

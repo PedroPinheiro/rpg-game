@@ -6,6 +6,7 @@ import pihead.games.rpg.engine.domain.entities.characters.Enemy;
 import pihead.games.rpg.engine.domain.entities.items.HealthItem;
 import pihead.games.rpg.engine.domain.entities.items.Weapon;
 import pihead.games.rpg.engine.gateway.GetRoomGateway;
+import pihead.games.rpg.engine.domain.EnterRoom.ResponseModel.*;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -47,25 +48,27 @@ public class DefaultEnterRoom implements EnterRoom {
         return builder.build();
     }
 
-    private Consumer<Enemy> addEnemyToResponse(ResponseModel.Builder builder) {
+    private Consumer<Enemy> addEnemyToResponse(Builder builder) {
         return (enemy) ->
             builder.addEnemy(enemy.getId(),
                     enemy.getType().getName(),
                     enemy.getType().getDamage(),
-                    enemy.getHealth());
+                    enemy.getHealth(),
+                    enemy.getType().getVelocity());
     }
 
-    private BiConsumer<RoomSide.Direction, RoomSide> addSideToResponse(ResponseModel.Builder builder) {
+    private BiConsumer<RoomSide.Direction, RoomSide> addSideToResponse(Builder builder) {
         return (direction, side) -> {
-            ResponseModel.RoomSideModel modelSide = getSideModel(direction);
-            addItemsToResponse(builder, side, modelSide);
-            addNextRoomsToResponse(builder, side, modelSide);
+
+            DirectionModel modelDirection = getSideDirection(direction);
+            addItemsToResponse(builder, side, modelDirection);
+            addNextRoomsToResponse(builder, side, modelDirection);
         };
     }
 
-    private void addItemsToResponse(ResponseModel.Builder builder,
+    private void addItemsToResponse(Builder builder,
                                     RoomSide side,
-                                    ResponseModel.RoomSideModel modelSide) {
+                                    DirectionModel directionModel) {
 
         if (side.getItems().size()>0) {
             side.getItems().forEach(item -> {
@@ -75,38 +78,35 @@ public class DefaultEnterRoom implements EnterRoom {
 
                 if (item instanceof HealthItem) {
                     HealthItem healthItem = (HealthItem) item;
-                    builder.addHealthItem(modelSide, itemId, itemName, healthItem.getType().getHealthPower());
+                    builder.addHealthItem(directionModel, itemId, itemName, healthItem.getType().getHealthPower());
                 } else {
                     Weapon weapon = (Weapon) item;
-                    builder.addWeapon(modelSide, itemId, itemName, weapon.getType().getDamage());
+                    builder.addWeapon(directionModel, itemId, itemName, weapon.getType().getDamage());
                 }
             });
         }
     }
 
-    private void addNextRoomsToResponse(ResponseModel.Builder builder,
+    private void addNextRoomsToResponse(Builder builder,
                                         RoomSide side,
-                                        ResponseModel.RoomSideModel modelSide) {
+                                        DirectionModel directionModel) {
 
         if (side.getNextRoom() != null) {
             int nextRoomId = side.getNextRoom().getId();
             String nextRoomName = side.getNextRoom().getName();
-            builder.addNextRoom(modelSide, nextRoomId, nextRoomName);
+            builder.addNextRoom(directionModel, nextRoomId, nextRoomName);
         }
     }
 
-    private ResponseModel.RoomSideModel getSideModel(RoomSide.Direction direction) {
+    private DirectionModel getSideDirection(RoomSide.Direction direction) {
 
-        ResponseModel.RoomSideModel result = ResponseModel.RoomSideModel.FRONT;
+        DirectionModel result = DirectionModel.FRONT;
         switch (direction) {
             case LEFT:
-                result = ResponseModel.RoomSideModel.LEFT;
+                result = DirectionModel.LEFT;
                 break;
             case RIGHT:
-                result = ResponseModel.RoomSideModel.RIGHT;
-                break;
-            case FRONT:
-                result = ResponseModel.RoomSideModel.FRONT;
+                result = DirectionModel.RIGHT;
                 break;
         }
 

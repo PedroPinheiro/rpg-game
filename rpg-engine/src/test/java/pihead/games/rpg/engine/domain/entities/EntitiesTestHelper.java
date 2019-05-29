@@ -69,10 +69,7 @@ public final class EntitiesTestHelper {
                 .name(nextString())
                 .description(nextString())
                 .addEnemy(gimmeEnemy().build())
-                .addEnemy(gimmeEnemy().build())
-                .addItem(RoomSide.Direction.LEFT, gimmeHealthItem().build())
-                .addItem(RoomSide.Direction.RIGHT, gimmeWeapon().build())
-                .addNextRoom(RoomSide.Direction.FRONT, gimmeEmptyRoom().build());
+                .addEnemy(gimmeEnemy().build());
     }
 
     public static Room.Builder gimmeEmptyRoom() {
