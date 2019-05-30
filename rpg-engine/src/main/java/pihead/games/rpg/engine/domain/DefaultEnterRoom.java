@@ -100,14 +100,14 @@ public class DefaultEnterRoom implements EnterRoom {
 
     private DirectionModel getSideDirection(RoomSide.Direction direction) {
 
-        DirectionModel result = DirectionModel.FRONT;
-        switch (direction) {
-            case LEFT:
-                result = DirectionModel.LEFT;
-                break;
-            case RIGHT:
-                result = DirectionModel.RIGHT;
-                break;
+        DirectionModel result;
+        
+        if (direction == RoomSide.Direction.LEFT) {
+            result = DirectionModel.LEFT;
+        } else if (direction == RoomSide.Direction.RIGHT) {
+            result = DirectionModel.RIGHT;
+        } else {
+            result = DirectionModel.FRONT;
         }
 
         return result;

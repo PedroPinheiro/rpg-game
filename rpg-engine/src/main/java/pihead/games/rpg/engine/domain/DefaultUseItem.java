@@ -34,7 +34,7 @@ public class DefaultUseItem implements UseItem {
 
         if (item instanceof HealthItem) {
             useHealthItem(player, (HealthItem) item);
-        } else if (item instanceof Weapon) {
+        } else {
             useWeapon(player, (Weapon) item);
         }
 

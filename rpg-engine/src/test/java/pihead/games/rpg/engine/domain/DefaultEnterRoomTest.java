@@ -32,14 +32,10 @@ public class DefaultEnterRoomTest {
     }
 
     @Test
-    public void leftOneItemRightOneItemFrontNextRoom() {
+    public void emptyRoom() {
 
         // given
-        Room room = gimmeRoom()
-                .addItem(RoomSide.Direction.LEFT, gimmeHealthItem().build())
-                .addItem(RoomSide.Direction.RIGHT, gimmeWeapon().build())
-                .addNextRoom(RoomSide.Direction.FRONT, gimmeEmptyRoom().build())
-                .build();
+        Room room = gimmeRoom().build();
 
         when(getRoomGateway.getById(room.getId())).thenReturn(Optional.of(room));
 
@@ -56,10 +52,13 @@ public class DefaultEnterRoomTest {
 
     }
     @Test
-    public void leftThreeItemRightThreeItemFrontThreeItem() {
+    public void fullRoom() {
 
         // given
         Room room = gimmeRoom()
+                .addEnemy(gimmeEnemy().build())
+                .addEnemy(gimmeEnemy().build())
+                .addEnemy(gimmeEnemy().build())
                 .addItem(RoomSide.Direction.LEFT, gimmeHealthItem().build())
                 .addItem(RoomSide.Direction.LEFT, gimmeHealthItem().build())
                 .addItem(RoomSide.Direction.LEFT, gimmeHealthItem().build())
@@ -69,6 +68,9 @@ public class DefaultEnterRoomTest {
                 .addItem(RoomSide.Direction.FRONT, gimmeWeapon().build())
                 .addItem(RoomSide.Direction.FRONT, gimmeWeapon().build())
                 .addItem(RoomSide.Direction.FRONT, gimmeWeapon().build())
+                .addNextRoom(RoomSide.Direction.LEFT, gimmeRoom().build())
+                .addNextRoom(RoomSide.Direction.RIGHT, gimmeRoom().build())
+                .addNextRoom(RoomSide.Direction.FRONT, gimmeRoom().build())
                 .build();
 
         when(getRoomGateway.getById(room.getId())).thenReturn(Optional.of(room));

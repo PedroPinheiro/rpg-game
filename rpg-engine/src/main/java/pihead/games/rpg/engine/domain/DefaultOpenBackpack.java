@@ -29,7 +29,7 @@ public class DefaultOpenBackpack implements OpenBackpack {
             if (item instanceof HealthItem) {
                 HealthItem healthItem = (HealthItem) item;
                 builder.addHealthItem(item.getId(), item.getType().getName(), healthItem.getType().getHealthPower());
-            } else if (item instanceof Weapon) {
+            } else {
                 Weapon weapon = (Weapon) item;
                 builder.addWeapon(item.getId(), item.getType().getName(), weapon.getType().getDamage());
             }
