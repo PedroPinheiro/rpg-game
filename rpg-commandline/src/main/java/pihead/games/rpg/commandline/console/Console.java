@@ -4,8 +4,6 @@ import pihead.games.rpg.commandline.resources.Resource;
 
 import java.io.*;
 
-import static pihead.games.rpg.commandline.resources.ResourceReader.getResource;
-
 public class Console {
 
     public static String ANSI_RESET = "\u001B[0m";
@@ -54,7 +52,7 @@ public class Console {
 
     public final static void printResource(TextColor textColor, Resource resource) {
 
-        InputStream in = getResource(resource);
+        InputStream in = resource.asStream();
 
         try {
             BufferedReader reader = new BufferedReader(
