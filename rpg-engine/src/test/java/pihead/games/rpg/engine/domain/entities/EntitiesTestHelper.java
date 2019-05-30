@@ -1,5 +1,6 @@
 package pihead.games.rpg.engine.domain.entities;
 
+import pihead.games.rpg.engine.domain.entities.backpack.Backpack;
 import pihead.games.rpg.engine.domain.entities.characters.*;
 import pihead.games.rpg.engine.domain.entities.items.*;
 
@@ -50,9 +51,19 @@ public final class EntitiesTestHelper {
     }
 
     public static Player.Builder gimmePlayer() {
+        int defaultHealth = 100;
         return Player.builder()
                 .id(nextPositiveInt())
-                .type(gimmePlayerType().build());
+                .health(defaultHealth)
+                .type(gimmePlayerType().build())
+                .backpack(gimmeBackpack().build());
+    }
+
+    public static Backpack.Builder gimmeBackpack() {
+        int defaultMaxSlots = 10;
+        return Backpack.builder()
+                .id(nextPositiveInt())
+                .maxSlots(defaultMaxSlots);
     }
 
     public static PlayerType.Builder gimmePlayerType() {

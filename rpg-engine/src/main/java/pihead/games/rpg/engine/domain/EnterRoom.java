@@ -52,6 +52,8 @@ public interface EnterRoom {
             return sides;
         }
 
+        // Builder
+
         public static Builder builder() {
             return new Builder();
         }
@@ -105,6 +107,8 @@ public interface EnterRoom {
                 return instance;
             }
         }
+
+        // Inner classes
 
         public static class EnemyModel {
             private int id;

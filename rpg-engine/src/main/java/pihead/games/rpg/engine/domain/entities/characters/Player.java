@@ -76,6 +76,11 @@ public class Player extends Character {
             return this;
         }
 
+        public Builder backpack(Backpack backpack) {
+            instance.backpack = backpack;
+            return this;
+        }
+
         public Builder type(PlayerType type) {
             instance.type = type;
             return this;
