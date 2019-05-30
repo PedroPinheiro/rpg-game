@@ -1,6 +1,7 @@
 package pihead.games.rpg.commandline;
 
 import pihead.games.rpg.commandline.pages.InitialPage;
+import pihead.games.rpg.commandline.console.Console;
 
 import java.io.IOException;
 
@@ -9,36 +10,17 @@ public class Main {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        clearConsole();
+        Console.initConsole();
 
         try {
+
             InitialPage initialPage = new InitialPage();
 
             initialPage.show();
 
         } finally {
-            clearConsole();
+            Console.initConsole();
         }
     }
 
-    public final static void clearConsole()
-    {
-        try
-        {
-            final String os = System.getProperty("os.name");
-
-            if (os.contains("Windows"))
-            {
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            }
-            else
-            {
-                Runtime.getRuntime().exec("clear");
-            }
-        }
-        catch (final Exception e)
-        {
-            //  Handle any exceptions.
-        }
-    }
 }

@@ -1,4 +1,4 @@
-package pihead.games.rpg.commandline.utils;
+package pihead.games.rpg.commandline.resources;
 
 import pihead.games.rpg.commandline.Main;
 
@@ -17,7 +17,6 @@ public class ResourceReader {
     }
 
     private static Map<Resource, String> resources = new HashMap<>();
-
 
     private static ClassLoader classLoader = (new Main()).getClass().getClassLoader();
 

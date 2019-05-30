@@ -1,6 +1,6 @@
 package pihead.games.rpg.commandline.pages;
 
-import pihead.games.rpg.commandline.utils.ResourceReader.Resource;
+import pihead.games.rpg.commandline.resources.ResourceReader.Resource;
 
 import java.util.ArrayList;
 import java.util.List;
