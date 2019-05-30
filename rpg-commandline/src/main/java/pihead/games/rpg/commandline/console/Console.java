@@ -1,8 +1,14 @@
 package pihead.games.rpg.commandline.console;
 
+import pihead.games.rpg.commandline.resources.Resource;
+
+import java.io.*;
+
+import static pihead.games.rpg.commandline.resources.ResourceReader.getResource;
+
 public class Console {
 
-    private static String ANSI_RESET = "\u001B[0m";
+    public static String ANSI_RESET = "\u001B[0m";
 
     public final static void initConsole()
     {
@@ -39,5 +45,40 @@ public class Console {
 
     public final static void println(String label) {
         print(label + "\n");
+    }
+
+    public final static void printResource(Resource resource) {
+
+        printResource(null, resource);
+    }
+
+    public final static void printResource(TextColor textColor, Resource resource) {
+
+        InputStream in = getResource(resource);
+
+        try {
+            BufferedReader reader = new BufferedReader(
+                new InputStreamReader(in, "UTF8"));
+
+            String str;
+            if (textColor != null) {
+                System.out.print(textColor.getAnsi());
+            }
+            while ((str = reader.readLine()) != null) {
+                System.out.println(str);
+            }
+            if (textColor != null) {
+                System.out.print(Console.ANSI_RESET);
+            }
+
+            reader.close();
+            in.close();
+        }
+        catch (IOException e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println();
     }
 }

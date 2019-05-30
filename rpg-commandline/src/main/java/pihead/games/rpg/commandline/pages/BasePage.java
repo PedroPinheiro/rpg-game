@@ -1,13 +1,10 @@
 package pihead.games.rpg.commandline.pages;
 
 import pihead.games.rpg.commandline.console.Console;
-import pihead.games.rpg.commandline.resources.ResourceReader.Resource;
 import pihead.games.rpg.commandline.console.TextColor;
 
 import java.util.List;
 import java.util.Scanner;
-
-import static pihead.games.rpg.commandline.resources.ResourceReader.getResourceAsString;
 
 // TODO: incomplete class
 public abstract class BasePage {
@@ -24,11 +21,6 @@ public abstract class BasePage {
         System.out.flush();
     }
 
-    protected void printResource(Resource resource) {
-
-        Console.println(getResourceAsString(resource) + "\n");
-    }
-
     protected String readLine() {
 
         Scanner scanner = new Scanner(System.in);
@@ -43,7 +35,9 @@ public abstract class BasePage {
         Integer option;
 
         try {
+            System.out.print(TextColor.YELLOW_BOLD.getAnsi());
             option = scanner.nextInt();
+            System.out.print(Console.ANSI_RESET);
             if (!validOptions.contains(option)) {
                 throw new Exception();
             }

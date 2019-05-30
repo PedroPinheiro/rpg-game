@@ -1,7 +1,7 @@
 package pihead.games.rpg.commandline;
 
-import pihead.games.rpg.commandline.pages.InitialPage;
 import pihead.games.rpg.commandline.console.Console;
+import pihead.games.rpg.commandline.pages.InitialPage;
 
 import java.io.IOException;
 

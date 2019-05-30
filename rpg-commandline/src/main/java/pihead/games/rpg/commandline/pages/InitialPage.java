@@ -2,7 +2,7 @@ package pihead.games.rpg.commandline.pages;
 
 import pihead.games.rpg.commandline.console.Console;
 import pihead.games.rpg.commandline.console.TextColor;
-import pihead.games.rpg.commandline.resources.ResourceReader.Resource;
+import pihead.games.rpg.commandline.resources.Resource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class InitialPage extends BasePage {
 
     public void doShow() {
 
-        printResource(Resource.PIHEAD_GAMES);
+        Console.printResource(Resource.PIHEAD_GAMES);
 
         Console.print(TextColor.YELLOW, "\t1. ");
         Console.println("Resident Evil");
