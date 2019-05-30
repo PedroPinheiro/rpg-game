@@ -24,9 +24,9 @@ import static pihead.games.rpg.engine.domain.TestHelper.nextPositiveInt;
 import static pihead.games.rpg.engine.domain.entities.EntitiesTestHelper.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DefaultUseHealthItemTest {
+public class DefaultUseItemTest {
 
-    private UseHealthItem usecase;
+    private UseItem usecase;
 
     @Mock
     private GetPlayerGateway getPlayerGateway;
@@ -37,11 +37,11 @@ public class DefaultUseHealthItemTest {
 
     @Before
     public void setup() {
-        usecase = new DefaultUseHealthItem(getPlayerGateway, updateBackpackGateway, updatePlayerGateway);
+        usecase = new DefaultUseItem(getPlayerGateway, updateBackpackGateway, updatePlayerGateway);
     }
 
     @Test
-    public void healthUseItem() throws BackpackIsFullException, ItemWillNotFitInBackpackException {
+    public void useHealthItem() throws BackpackIsFullException, ItemWillNotFitInBackpackException {
 
         // given
         int initialPlayerHealth = 50;
@@ -64,6 +64,52 @@ public class DefaultUseHealthItemTest {
 
         verify(updateBackpackGateway, only()).updateBackpack(backpack);
         verify(updatePlayerGateway, only()).updatePlayer(player);
+
+    }
+
+    @Test
+    public void useWeapon() throws BackpackIsFullException, ItemWillNotFitInBackpackException {
+
+        // given : old weapon
+        int oldPlayerWeaponSlots = 2;
+        WeaponType oldPlayerWeaponType = gimmeWeaponType().slots(oldPlayerWeaponSlots).build();
+        Weapon oldPlayerWeapon = gimmeWeapon().type(oldPlayerWeaponType).build();
+
+        // given : player
+        Player player = gimmePlayer().build();
+        player.chooseWeapon(oldPlayerWeapon);
+        Backpack backpack = player.getBackpack();
+
+        // given : new weapon
+        int newWeaponSlots = 1;
+        WeaponType newWeaponType = gimmeWeaponType().slots(newWeaponSlots).build();
+        Weapon weapon = gimmeWeapon().type(newWeaponType).build();
+        backpack.addItem(weapon);
+
+        int initialAvailableSlots = backpack.getAvailableSlots();
+        int initialItemSize = backpack.getItems().size();
+
+        when(getPlayerGateway.getById(player.getId())).thenReturn(Optional.of(player));
+
+        // when
+        usecase.useItem(player.getId(), weapon.getId());
+
+        // then
+        verify(updateBackpackGateway, only()).updateBackpack(backpack);
+        verify(updatePlayerGateway, only()).updatePlayer(player);
+
+        // old weapon is on backpack
+        Optional<Item> oldWeaponFoundOnBackpack = backpack.getItems().stream()
+                .filter(i -> i.getId() == oldPlayerWeapon.getId())
+                .findFirst();
+        assertThat(oldWeaponFoundOnBackpack.isPresent()).isTrue();
+
+        // modification on the backpack
+        assertThat(backpack.getItems().size()).isEqualTo(initialItemSize);
+        assertThat(backpack.getAvailableSlots()).isEqualTo(initialAvailableSlots + newWeaponSlots - oldPlayerWeaponSlots);
+
+        // Weapon taken from backpack now is on the weapon
+        assertThat(player.getWeapon()).isEqualTo(weapon);
 
     }
 
@@ -114,31 +160,4 @@ public class DefaultUseHealthItemTest {
     }
 
 
-    @Test
-    public void itemIsNotHealthItem() throws BackpackIsFullException, ItemWillNotFitInBackpackException {
-
-        // given
-        int initialPlayerHealth = 50;
-        Player player = gimmePlayer().health(initialPlayerHealth).build();
-        Backpack backpack = player.getBackpack();
-        Weapon weapon = gimmeWeapon().build();
-        backpack.addItem(weapon);
-        int initialAvailableSlots = backpack.getAvailableSlots();
-        int initialItemSize = backpack.getItems().size();
-
-        when(getPlayerGateway.getById(player.getId())).thenReturn(Optional.of(player));
-
-        // when
-        Throwable thrown = catchThrowable(() ->
-                usecase.useItem(player.getId(), weapon.getId())
-        );
-
-        // then
-        assertThat(thrown).isExactlyInstanceOf(RuntimeException.class)
-                .hasMessage("Item is not a health item to heal");
-
-        verify(updateBackpackGateway, never()).updateBackpack(any(Backpack.class));
-        verify(updatePlayerGateway, never()).updatePlayer(any(Player.class));
-
-    }
 }
