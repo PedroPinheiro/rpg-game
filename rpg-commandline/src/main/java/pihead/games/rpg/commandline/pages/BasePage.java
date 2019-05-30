@@ -55,7 +55,7 @@ public abstract class BasePage {
     }
 
     private Integer reReadOption(String label, List<Integer> validOptions) {
-        Console.printLnColor(TextColor.RED, "(Wrong option)");
+        Console.println(TextColor.RED, "(Wrong option)");
         return readOption(label, validOptions);
     }
 

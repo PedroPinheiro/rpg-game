@@ -25,11 +25,19 @@ public class Console {
         }
     }
 
-    public final static void printColor(TextColor textColor, String label) {
+    public final static void print(TextColor textColor, String label) {
         System.out.print(textColor.getAnsi() + label + ANSI_RESET);
     }
 
-    public final static void printLnColor(TextColor textColor, String label) {
-        printColor(textColor, label + "\n");
+    public final static void println(TextColor textColor, String label) {
+        print(textColor, label + "\n");
+    }
+
+    public final static void print(String label) {
+        System.out.print(label + ANSI_RESET);
+    }
+
+    public final static void println(String label) {
+        print(label + "\n");
     }
 }
