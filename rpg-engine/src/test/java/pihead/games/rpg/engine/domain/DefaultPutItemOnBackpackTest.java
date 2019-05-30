@@ -1,6 +1,5 @@
 package pihead.games.rpg.engine.domain;
 
-import org.assertj.core.api.ThrowableAssert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
