@@ -1,3 +1,7 @@
-rootProject.name = 'resident-evil'
 rootProject.name = 'rpg'
+
+include 'rpg-commandline'
+include 'rpg-engine'
+include 'rpg-residentevil'
+
 

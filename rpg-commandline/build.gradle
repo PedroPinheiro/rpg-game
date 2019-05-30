@@ -1,16 +1,72 @@
-plugins {
-    id 'java'
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'edu.sc.seis.gradle:launch4j:2.4.6'
+    }
 }
 
 group 'pihead-games'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 1.8
-
 repositories {
+    jcenter()
     mavenCentral()
 }
 
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'edu.sc.seis.launch4j'
+
+applicationName = 'rpg-commandline'
+mainClassName = 'pihead.games.rpg.commandline.Main'
+
+sourceCompatibility = 1.8
+
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    compile(
+        project(':rpg-engine'),
+        project(':rpg-residentevil')
+    )
+}
+
+jar {
+    baseName = applicationName
+
+    doFirst {
+        from {
+            configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+        }
+    }
+
+    // Remove digital signature files to ensure an executable JAR file.
+    exclude 'META-INF/*.RSA', 'META-INF/*.SF','META-INF/*.DSA'
+
+    manifest {
+        attributes 'Main-Class': mainClassName
+        attributes 'Class-Path': configurations.compile.collect {
+            'libs/' + it.getName()
+        }.join(' ')
+    }
+}
+
+distributions {
+    main {
+        baseName = applicationName
+        contents {
+            from { ['LICENSE', 'README.md'] }
+            into( 'images' ) {
+                from { 'images' }
+            }
+        }
+    }
+
+    launch4j {
+        mainClassName = mainClassName
+    }
+
+    assemble.dependsOn createAllExecutables
 }
