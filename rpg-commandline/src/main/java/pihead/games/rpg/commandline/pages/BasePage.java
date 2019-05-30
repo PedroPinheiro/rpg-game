@@ -26,7 +26,7 @@ public abstract class BasePage {
 
     protected void printResource(Resource resource) {
 
-        System.out.println(getResourceAsString(resource) + "\n");
+        Console.println(getResourceAsString(resource) + "\n");
     }
 
     protected String readLine() {

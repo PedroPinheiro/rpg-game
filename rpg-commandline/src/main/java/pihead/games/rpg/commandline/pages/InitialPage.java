@@ -1,5 +1,7 @@
 package pihead.games.rpg.commandline.pages;
 
+import pihead.games.rpg.commandline.console.Console;
+import pihead.games.rpg.commandline.console.TextColor;
 import pihead.games.rpg.commandline.resources.ResourceReader.Resource;
 
 import java.util.ArrayList;
@@ -17,6 +19,10 @@ public class InitialPage extends BasePage {
 
         printResource(Resource.PIHEAD_GAMES);
 
+        Console.print(TextColor.YELLOW, "\t1. ");
+        Console.println("Resident Evil");
+
+        Console.println(" ");
         selectGame();
 
     }

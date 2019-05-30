@@ -1,5 +1,7 @@
 package pihead.games.rpg.commandline.pages;
 
+import pihead.games.rpg.commandline.console.Console;
+import pihead.games.rpg.commandline.console.TextColor;
 import pihead.games.rpg.commandline.resources.ResourceReader.Resource;
 
 import java.util.ArrayList;
@@ -12,6 +14,13 @@ public class GameHomePage extends BasePage {
 
         printResource(Resource.RESIDENT_EVIL);
 
+        Console.print(TextColor.YELLOW, "\t1. ");
+        Console.println("Leon");
+
+        Console.print(TextColor.YELLOW, "\t2. ");
+        Console.println("Claire");
+
+        Console.println(" ");
         selectCharacter();
 
         readLine();

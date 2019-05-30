@@ -9,6 +9,3 @@ ______          _     _            _     _____      _ _
 
 Welcome to Resident Evil!
 Please select one Character:
-
-1. Leon
-2. Claire

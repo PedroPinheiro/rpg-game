@@ -8,5 +8,3 @@
 
 Welcome to the PiHead RPG Game!
 Please select on game on the list:
-
-1. Resident Evil
