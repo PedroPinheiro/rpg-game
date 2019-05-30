@@ -78,9 +78,7 @@ public final class EntitiesTestHelper {
         return Room.builder()
                 .id(nextPositiveInt())
                 .name(nextString())
-                .description(nextString())
-                .addEnemy(gimmeEnemy().build())
-                .addEnemy(gimmeEnemy().build());
+                .description(nextString());
     }
 
     public static Room.Builder gimmeEmptyRoom() {
