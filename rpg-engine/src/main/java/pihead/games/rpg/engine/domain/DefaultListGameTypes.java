@@ -1,22 +1,22 @@
 package pihead.games.rpg.engine.domain;
 
 import pihead.games.rpg.engine.domain.entities.GameType;
-import pihead.games.rpg.engine.gateway.GetGameTypeGateway;
+import pihead.games.rpg.engine.gateway.ListGameTypeGateway;
 
-import java.util.List;
+import java.util.Collection;
 
 public class DefaultListGameTypes implements ListGameTypes {
 
-    private GetGameTypeGateway getGameTypeGateway;
+    private ListGameTypeGateway listGameTypeGateway;
 
-    public DefaultListGameTypes(GetGameTypeGateway getGameTypeGateway){
-        this.getGameTypeGateway = getGameTypeGateway;
+    public DefaultListGameTypes(ListGameTypeGateway listGameTypeGateway){
+        this.listGameTypeGateway = listGameTypeGateway;
     }
 
     @Override
     public ResponseModel list() {
 
-        List<GameType> gameTypes = getGameTypeGateway.findAll();
+        Collection<GameType> gameTypes = listGameTypeGateway.findAll();
 
         ResponseModel.Builder builder = ResponseModel.builder();
 

@@ -8,9 +8,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import pihead.games.rpg.engine.domain.DefaultListGameTypes;
 import pihead.games.rpg.engine.domain.ListGameTypes;
 import pihead.games.rpg.engine.domain.ListGameTypes.ResponseModel;
-import pihead.games.rpg.engine.domain.ListGameTypes.ResponseModel.*;
 import pihead.games.rpg.engine.domain.entities.GameType;
-import pihead.games.rpg.engine.gateway.GetGameTypeGateway;
+import pihead.games.rpg.engine.gateway.ListGameTypeGateway;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +24,11 @@ public class DefaultListGameTypesTest {
     private ListGameTypes usecase;
 
     @Mock
-    private GetGameTypeGateway getGameTypeGateway;
+    private ListGameTypeGateway listGameTypeGateway;
 
     @Before
     public void setup() {
-        usecase = new DefaultListGameTypes(getGameTypeGateway);
+        usecase = new DefaultListGameTypes(listGameTypeGateway);
     }
 
     @Test
@@ -39,7 +38,7 @@ public class DefaultListGameTypesTest {
         GameType gameType = gimmeGameType().build();
         List<GameType> gameTypes = new ArrayList<GameType>() {{ add(gameType); }};
 
-        when(getGameTypeGateway.findAll()).thenReturn(gameTypes);
+        when(listGameTypeGateway.findAll()).thenReturn(gameTypes);
 
         // when
         ResponseModel list = usecase.list();
@@ -59,7 +58,7 @@ public class DefaultListGameTypesTest {
         GameType gameType = gimmeGameType().build();
         List<GameType> gameTypes = new ArrayList<GameType>() {{ add(gameType); }};
 
-        when(getGameTypeGateway.findAll()).thenReturn(gameTypes);
+        when(listGameTypeGateway.findAll()).thenReturn(gameTypes);
 
         // when
         ResponseModel list = usecase.list();
