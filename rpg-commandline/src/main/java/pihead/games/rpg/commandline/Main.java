@@ -37,10 +37,9 @@ public class Main {
             }
 
         } finally {
-//            Console.initConsole();
+            Console.initConsole();
         }
 
-        (new Scanner(System.in)).nextLine();
     }
 
 }
