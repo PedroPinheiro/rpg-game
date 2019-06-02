@@ -6,6 +6,7 @@ import pihead.games.rpg.engine.domain.entities.characters.Player;
 import pihead.games.rpg.engine.domain.entities.characters.PlayerType;
 
 import java.util.Collection;
+import java.util.UUID;
 
 public abstract class GameLoader {
 
@@ -32,7 +33,7 @@ public abstract class GameLoader {
     public GameType getGameType() {
 
         GameType.Builder builder = GameType.builder()
-                .id(1)
+                .id(getGameUUID().toString())
                 .name(getGameLabel());
 
         for (PlayerType playerType : getPlayerTypes()) {
@@ -45,6 +46,8 @@ public abstract class GameLoader {
     protected abstract Collection<StageLoader> getStageLoaders();
 
     protected abstract String getGameLabel();
+
+    protected abstract UUID getGameUUID();
 
     protected abstract Collection<PlayerType> getPlayerTypes();
 

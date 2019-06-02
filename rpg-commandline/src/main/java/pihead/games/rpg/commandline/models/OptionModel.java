@@ -1,8 +1,8 @@
 package pihead.games.rpg.commandline.models;
 
-public interface OptionModel extends Model {
+public interface OptionModel<T> extends Model {
 
-    int getId();
+    T getId();
     String getName();
 
 }

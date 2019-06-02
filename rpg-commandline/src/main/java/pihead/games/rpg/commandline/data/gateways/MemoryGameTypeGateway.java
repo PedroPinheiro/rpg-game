@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class MemoryGameTypeGateway implements ListGameTypeGateway {
 
-    private static Map<Integer, GameType> gameTypeMap = new HashMap<>();
+    private static Map<String, GameType> gameTypeMap = new HashMap<>();
 
     @Override
     public Collection<GameType> findAll() {

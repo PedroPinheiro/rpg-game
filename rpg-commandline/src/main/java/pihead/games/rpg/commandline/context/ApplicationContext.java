@@ -19,6 +19,11 @@ public class ApplicationContext {
 
     private static Map<Class<?>, Object> beans = new HashMap<>();
 
+    private static void registerConsoleGameLoader() {
+        ConsoleGameLoader consoleGameLoader = new PropertiesConsoleGameLoader();
+        put(ConsoleGameLoader.class, consoleGameLoader);
+    }
+
     private static void registerGateways() {
 
         put(ListGameTypeGateway.class, new MemoryGameTypeGateway());
@@ -51,7 +56,7 @@ public class ApplicationContext {
 
     private static void registerPresenters() {
 
-        GamePresenter gamePresenter = new GamePresenter(get(GameHomePage.class));
+        GamePresenter gamePresenter = new GamePresenter(get(ConsoleGameLoader.class), get(GameHomePage.class));
         put(GamePresenter.class, gamePresenter);
 
         InitialPresenter initialPresenter = new InitialPresenter(get(ListGameTypes.class), get(InitialPage.class));
@@ -60,9 +65,6 @@ public class ApplicationContext {
     }
 
     private static void registerMain() {
-
-        ConsoleGameLoader consoleGameLoader = new PropertiesConsoleGameLoader();
-        put(ConsoleGameLoader.class, consoleGameLoader);
 
         GameManager gameManager = new GameManager(get(ConsoleGameLoader.class), get(InitialPresenter.class));
         put(GameManager.class, gameManager);
@@ -83,6 +85,7 @@ public class ApplicationContext {
 
     public static Main init(Class<Main> mainClass) {
 
+        registerConsoleGameLoader();
         registerGateways();
         registerUsecases();
         registerViews();

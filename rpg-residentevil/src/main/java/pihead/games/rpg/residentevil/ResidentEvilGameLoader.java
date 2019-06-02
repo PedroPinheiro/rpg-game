@@ -7,6 +7,7 @@ import pihead.games.rpg.residentevil.stages.first.PoliceDepartmentStage;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.UUID;
 
 public class ResidentEvilGameLoader extends GameLoader {
 
@@ -22,6 +23,11 @@ public class ResidentEvilGameLoader extends GameLoader {
     @Override
     protected String getGameLabel() {
         return "Resident Evil";
+    }
+
+    @Override
+    protected UUID getGameUUID() {
+        return Config.RESIDENT_EVIL_UUID;
     }
 
     @Override

@@ -2,13 +2,13 @@ package pihead.games.rpg.engine.domain.entities;
 
 import pihead.games.rpg.engine.domain.entities.characters.PlayerType;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class GameType {
 
-    private Integer id;
+    private String id;
     private String name;
     private String description;
     private List<PlayerType> playerTypes = new ArrayList<>();
@@ -17,7 +17,7 @@ public class GameType {
 
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
@@ -48,13 +48,13 @@ public class GameType {
             instance = new GameType();
         }
 
-        public Builder id(int id) {
-            instance.id = id;
+        public Builder name(String name) {
+            instance.name = name;
             return this;
         }
 
-        public Builder name(String name) {
-            instance.name = name;
+        public Builder id(String id) {
+            instance.id = id;
             return this;
         }
 

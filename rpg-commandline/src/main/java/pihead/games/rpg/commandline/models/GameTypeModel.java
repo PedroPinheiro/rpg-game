@@ -4,21 +4,21 @@ import java.io.InputStream;
 
 public class GameTypeModel implements OptionModel {
 
-    private int id;
+    private String id;
     private String name;
     private InputStream titleInputStream;
 
-    public GameTypeModel(int id, String name, InputStream titleInputStream) {
+    public GameTypeModel(String id, String name, InputStream titleInputStream) {
         this.id = id;
         this.name = name;
         this.titleInputStream = titleInputStream;
     }
-    public GameTypeModel(int id, String name) {
+    public GameTypeModel(String id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

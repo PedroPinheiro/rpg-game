@@ -31,7 +31,7 @@ public interface ListGameTypes {
                 instance = new ResponseModel();
             }
 
-            public Builder addGameType(int id, String name, String description) {
+            public Builder addGameType(String id, String name, String description) {
                 instance.gameTypes.add(new GameTypeModel(id, name, description));
                 return this;
             }
@@ -43,17 +43,17 @@ public interface ListGameTypes {
 
 
         public static class GameTypeModel {
-            private int id;
+            private String id;
             private String name;
             private String description;
 
-            private GameTypeModel(int id, String name, String description) {
+            private GameTypeModel(String id, String name, String description) {
                 this.id = id;
                 this.name = name;
                 this.description = description;
             }
 
-            public int getId() {
+            public String getId() {
                 return id;
             }
 
