@@ -12,10 +12,9 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-
     compile(
-            project(':rpg-engine'),
-            project(':rpg-console-engine'),
+            project(':rpg-engine')
     )
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
 }

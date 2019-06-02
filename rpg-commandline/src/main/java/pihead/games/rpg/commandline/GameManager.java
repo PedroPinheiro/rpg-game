@@ -1,8 +1,11 @@
 package pihead.games.rpg.commandline;
 
+import pihead.games.rpg.commandline.config.ConfigProperties;
 import pihead.games.rpg.commandline.console.Console;
 import pihead.games.rpg.commandline.console.TextColor;
 import pihead.games.rpg.commandline.context.ApplicationContext;
+import pihead.games.rpg.commandline.context.ConsoleGameLoader;
+import pihead.games.rpg.commandline.data.gateways.MemoryGameTypeGateway;
 import pihead.games.rpg.commandline.models.Model;
 import pihead.games.rpg.commandline.views.pages.Page;
 import pihead.games.rpg.commandline.responses.GameResponse;
@@ -10,12 +13,19 @@ import pihead.games.rpg.commandline.responses.GameResponsePage;
 import pihead.games.rpg.commandline.presenters.InitialPresenter;
 import pihead.games.rpg.commandline.presenters.Presenter;
 import pihead.games.rpg.commandline.responses.GameResponseShutdown;
+import pihead.games.rpg.engine.domain.entities.GameType;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public final class GameManager {
 
+    private ConsoleGameLoader consoleGameLoader;
     private InitialPresenter initialPresenter;
 
-    public GameManager(InitialPresenter initialPresenter) {
+    public GameManager(ConsoleGameLoader consoleGameLoader,
+                       InitialPresenter initialPresenter) {
+        this.consoleGameLoader = consoleGameLoader;
         this.initialPresenter = initialPresenter;
     }
 
@@ -25,6 +35,7 @@ public final class GameManager {
 
         try {
 
+            initGameTypes();
             runPresenter(initialPresenter, null);
 
         } catch (Exception ex) {
@@ -38,6 +49,13 @@ public final class GameManager {
             Console.initConsole();
         }
 
+    }
+
+    private void initGameTypes() {
+
+        List<GameType> gameTypes = consoleGameLoader.getGameTypes();
+
+        (new MemoryGameTypeGateway()).addAll(gameTypes);
     }
 
     private void runPresenter(Presenter presenter, Model requestModel) {

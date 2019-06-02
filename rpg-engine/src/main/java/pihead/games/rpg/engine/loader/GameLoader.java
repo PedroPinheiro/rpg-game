@@ -5,7 +5,6 @@ import pihead.games.rpg.engine.domain.entities.GameType;
 import pihead.games.rpg.engine.domain.entities.characters.Player;
 import pihead.games.rpg.engine.domain.entities.characters.PlayerType;
 
-import java.io.InputStream;
 import java.util.Collection;
 
 public abstract class GameLoader {
@@ -22,8 +21,6 @@ public abstract class GameLoader {
 
         return builder.build();
     }
-
-    protected abstract Collection<StageLoader> getStageLoaders();
 
     private Player getPlayer(PlayerType playerType, String playerName) {
         return Player.builder()
@@ -45,12 +42,10 @@ public abstract class GameLoader {
         return builder.build();
     }
 
+    protected abstract Collection<StageLoader> getStageLoaders();
+
     protected abstract String getGameLabel();
 
     protected abstract Collection<PlayerType> getPlayerTypes();
-
-    public abstract InputStream getTitle();
-
-
 
 }

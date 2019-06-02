@@ -61,7 +61,10 @@ public class ApplicationContext {
 
     private static void registerMain() {
 
-        GameManager gameManager = new GameManager(get(InitialPresenter.class));
+        ConsoleGameLoader consoleGameLoader = new PropertiesConsoleGameLoader();
+        put(ConsoleGameLoader.class, consoleGameLoader);
+
+        GameManager gameManager = new GameManager(get(ConsoleGameLoader.class), get(InitialPresenter.class));
         put(GameManager.class, gameManager);
 
         Main main = new Main(get(GameManager.class));

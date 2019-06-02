@@ -27,13 +27,4 @@ public class MemoryGameTypeGateway implements ListGameTypeGateway {
         }
     }
 
-    static {
-
-        GameLoader gameLoader = new ResidentEvilGameLoader();
-
-        (new MemoryGameTypeGateway()).addAll(new ArrayList<GameType>() {{
-            add(gameLoader.getGameType());
-            add(GameType.builder().id(2).name("Silent Hill").addPlayerType(PlayerType.builder().id(3).build()).build());
-        }});
-    }
 }

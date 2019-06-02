@@ -5,13 +5,10 @@ import pihead.games.rpg.engine.loader.GameLoader;
 import pihead.games.rpg.engine.loader.StageLoader;
 import pihead.games.rpg.residentevil.stages.first.PoliceDepartmentStage;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class ResidentEvilGameLoader extends GameLoader {
-
-    private static final String TITLE_PATH = "resident-evil.txt";
 
     private PoliceDepartmentStage policeDepartmentStage = new PoliceDepartmentStage();
 
@@ -33,11 +30,6 @@ public class ResidentEvilGameLoader extends GameLoader {
             add(buildLeon());
             add(buildClaire());
         }};
-    }
-
-    @Override
-    public InputStream getTitle() {
-        return this.getClass().getClassLoader().getResourceAsStream(TITLE_PATH);
     }
 
     private PlayerType buildLeon() {
