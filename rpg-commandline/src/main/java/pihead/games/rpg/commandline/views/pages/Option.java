@@ -1,4 +1,4 @@
-package pihead.games.rpg.commandline.pages;
+package pihead.games.rpg.commandline.views.pages;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,6 +1,6 @@
 package pihead.games.rpg.commandline.models;
 
-public class GameTypeModel implements Model {
+public class GameTypeModel implements OptionModel {
 
     private int id;
     private String name;

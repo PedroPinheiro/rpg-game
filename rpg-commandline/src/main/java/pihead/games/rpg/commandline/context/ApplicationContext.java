@@ -3,8 +3,9 @@ package pihead.games.rpg.commandline.context;
 import pihead.games.rpg.commandline.GameManager;
 import pihead.games.rpg.commandline.Main;
 import pihead.games.rpg.commandline.data.gateways.MemoryGameTypeGateway;
-import pihead.games.rpg.commandline.pages.GameHomePage;
-import pihead.games.rpg.commandline.pages.InitialPage;
+import pihead.games.rpg.commandline.views.SelectOptionView;
+import pihead.games.rpg.commandline.views.pages.GameHomePage;
+import pihead.games.rpg.commandline.views.pages.InitialPage;
 import pihead.games.rpg.commandline.presenters.GamePresenter;
 import pihead.games.rpg.commandline.presenters.InitialPresenter;
 import pihead.games.rpg.engine.domain.DefaultListGameTypes;
@@ -31,12 +32,19 @@ public class ApplicationContext {
 
     }
 
+    private static void registerViews() {
+
+        SelectOptionView selectOptionView = new SelectOptionView();
+        put(SelectOptionView.class, selectOptionView);
+
+    }
+
     private static void registerPages() {
 
         GameHomePage gameHomePage = new GameHomePage();
         put(GameHomePage.class, gameHomePage);
 
-        InitialPage initialPage = new InitialPage();
+        InitialPage initialPage = new InitialPage(get(SelectOptionView.class));
         put(InitialPage.class, initialPage);
 
     }
@@ -74,6 +82,7 @@ public class ApplicationContext {
 
         registerGateways();
         registerUsecases();
+        registerViews();
         registerPages();
         registerPresenters();
         registerMain();

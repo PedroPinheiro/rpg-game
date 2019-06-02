@@ -1,18 +1,25 @@
-package pihead.games.rpg.commandline.pages;
+package pihead.games.rpg.commandline.views.pages;
 
 import pihead.games.rpg.commandline.console.Console;
 import pihead.games.rpg.commandline.console.TextColor;
-import pihead.games.rpg.commandline.models.Model;
+import pihead.games.rpg.commandline.models.GameTypeModel;
 import pihead.games.rpg.commandline.resources.Resource;
+import pihead.games.rpg.commandline.responses.GameResponse;
 import pihead.games.rpg.commandline.responses.GameResponseShutdown;
 
 // TODO: incomplete class
-public class GameHomePage extends Page {
+public class GameHomePage extends Page<GameTypeModel> {
 
     @Override
-    protected GameResponseShutdown doShow(Model model) {
+    protected GameResponse doShow(GameTypeModel model) {
 
-        Console.printResource(TextColor.RED, Resource.RESIDENT_EVIL);
+        clearScreen();
+
+        if (model.getId() == 1) {
+            Console.printResource(TextColor.RED, Resource.RESIDENT_EVIL);
+        } else {
+            Console.printResource(TextColor.PURPLE, Resource.SILENT_HILL);
+        }
 
         Console.print(TextColor.YELLOW, "\t1. ");
         Console.println("Leon");
@@ -20,10 +27,13 @@ public class GameHomePage extends Page {
         Console.print(TextColor.YELLOW, "\t2. ");
         Console.println("Claire");
 
+        Console.print(TextColor.YELLOW, "\t0. ");
+        Console.println("\nGet back");
+
         Console.println(" ");
-//        selectCharacter();
 
         readLine();
+//        selectCharacter();
 
         return new GameResponseShutdown();
     }

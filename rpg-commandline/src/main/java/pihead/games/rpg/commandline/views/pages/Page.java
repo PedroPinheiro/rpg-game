@@ -1,4 +1,4 @@
-package pihead.games.rpg.commandline.pages;
+package pihead.games.rpg.commandline.views.pages;
 
 import pihead.games.rpg.commandline.console.Console;
 import pihead.games.rpg.commandline.console.TextColor;
@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.Scanner;
 
 // TODO: incomplete class
-public abstract class Page<T extends Model, R extends GameResponse> {
+public abstract class Page<T extends Model> {
 
-    protected abstract R doShow(T model);
+    protected abstract GameResponse doShow(T model);
 
-    public R show(T model) {
+    public GameResponse show(T model) {
         clearScreen();
         return doShow(model);
     }
@@ -29,6 +29,7 @@ public abstract class Page<T extends Model, R extends GameResponse> {
         return scanner.nextLine();
     }
 
+    @Deprecated
     protected Integer readOption(String label, List<Integer> validOptions) {
 
         System.out.print(label + ": ");

@@ -1,7 +1,8 @@
 package pihead.games.rpg.commandline.presenters;
 
 import pihead.games.rpg.commandline.models.GameTypeModel;
-import pihead.games.rpg.commandline.pages.GameHomePage;
+import pihead.games.rpg.commandline.models.Model;
+import pihead.games.rpg.commandline.views.pages.GameHomePage;
 
 public class GamePresenter implements Presenter<GameHomePage, GameTypeModel> {
 
@@ -11,13 +12,19 @@ public class GamePresenter implements Presenter<GameHomePage, GameTypeModel> {
         this.gameHomePage = gameHomePage;
     }
 
-    @Override
     public GameHomePage getPage() {
         return gameHomePage;
     }
 
     @Override
-    public GameTypeModel getModel() {
-        return null;
+    public GameTypeModel getModel(Model requestModel) {
+
+        if (!(requestModel instanceof GameTypeModel)) {
+            throw new RuntimeException();
+        }
+
+        return (GameTypeModel) requestModel;
+
     }
+
 }

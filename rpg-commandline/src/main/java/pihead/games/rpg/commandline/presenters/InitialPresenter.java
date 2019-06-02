@@ -1,8 +1,10 @@
 package pihead.games.rpg.commandline.presenters;
 
+import pihead.games.rpg.commandline.models.GameTypeModel;
 import pihead.games.rpg.commandline.models.InitialModel;
+import pihead.games.rpg.commandline.models.Model;
 import pihead.games.rpg.commandline.models.OptionModel;
-import pihead.games.rpg.commandline.pages.InitialPage;
+import pihead.games.rpg.commandline.views.pages.InitialPage;
 import pihead.games.rpg.engine.domain.ListGameTypes;
 
 import java.util.List;
@@ -24,15 +26,16 @@ public class InitialPresenter implements Presenter<InitialPage, InitialModel> {
         return initialPage;
     }
 
-    public InitialModel getModel() {
+    public InitialModel getModel(Model i) {
 
         ListGameTypes.ResponseModel responseModel = listGameTypes.list();
 
         List<OptionModel> options = responseModel.getGameTypes().stream()
-                .map(gt -> new OptionModel(gt.getId(), gt.getName()))
+                .map(gt -> new GameTypeModel(gt.getId(), gt.getName()))
                 .collect(Collectors.toList());
 
         return new InitialModel(options);
 
     }
+
 }

@@ -3,8 +3,8 @@ package pihead.games.rpg.commandline;
 import pihead.games.rpg.commandline.console.Console;
 import pihead.games.rpg.commandline.console.TextColor;
 import pihead.games.rpg.commandline.context.ApplicationContext;
-import pihead.games.rpg.commandline.pages.InitialPage;
-import pihead.games.rpg.commandline.pages.Page;
+import pihead.games.rpg.commandline.models.Model;
+import pihead.games.rpg.commandline.views.pages.Page;
 import pihead.games.rpg.commandline.responses.GameResponse;
 import pihead.games.rpg.commandline.responses.GameResponsePage;
 import pihead.games.rpg.commandline.presenters.InitialPresenter;
@@ -25,7 +25,7 @@ public final class GameManager {
 
         try {
 
-            runPresenter(initialPresenter);
+            runPresenter(initialPresenter, null);
 
         } catch (Exception ex) {
 
@@ -40,10 +40,11 @@ public final class GameManager {
 
     }
 
-    protected void runPresenter(Presenter presenter) {
+    private void runPresenter(Presenter presenter, Model requestModel) {
 
         Page page = presenter.getPage();
-        GameResponse gameResponse = page.show(presenter.getModel());
+        Model model = presenter.getModel(requestModel);
+        GameResponse gameResponse = page.show(model);
 
         processResponse(gameResponse);
     }
@@ -55,11 +56,12 @@ public final class GameManager {
             GameResponsePage gameResponse = (GameResponsePage) response;
 
             Presenter presenter = (Presenter) ApplicationContext.get(gameResponse.getPresenterClazz());
+            Model requestModel = gameResponse.getModel();
 
-            runPresenter(presenter);
+            runPresenter(presenter, requestModel);
 
         } else if (response instanceof GameResponseShutdown) {
-            System.out.close();
+            // TODO: log close
         }
 
     }
