@@ -24,4 +24,5 @@ public enum Resource {
     public InputStream asStream() {
         return classLoader.getResourceAsStream(this.getPath());
     }
+
 }

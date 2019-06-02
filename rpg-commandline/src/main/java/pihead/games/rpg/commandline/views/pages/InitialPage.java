@@ -22,7 +22,7 @@ public class InitialPage extends Page<InitialModel> {
 
     public GameResponse doShow(InitialModel model) {
 
-        Console.printResource(Resource.PIHEAD_GAMES);
+        Console.print(Resource.PIHEAD_GAMES);
 
         List<OptionModel> options = model.getGameOptions();
 

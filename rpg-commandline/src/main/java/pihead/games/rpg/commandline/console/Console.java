@@ -45,18 +45,26 @@ public class Console {
         print(label + "\n");
     }
 
-    public final static void printResource(Resource resource) {
+    public final static void print(Resource resource) {
 
-        printResource(null, resource);
+        print(null, resource);
     }
 
-    public final static void printResource(TextColor textColor, Resource resource) {
+    public final static void print(TextColor textColor, Resource resource) {
 
-        InputStream in = resource.asStream();
+        print(textColor, resource.asStream());
+    }
+
+    public final static void print(InputStream inputStream) {
+
+        print(null, inputStream);
+    }
+
+    public final static void print(TextColor textColor, InputStream inputStream) {
 
         try {
             BufferedReader reader = new BufferedReader(
-                new InputStreamReader(in, "UTF8"));
+                    new InputStreamReader(inputStream, "UTF8"));
 
             String str;
             if (textColor != null) {
@@ -70,7 +78,7 @@ public class Console {
             }
 
             reader.close();
-            in.close();
+            inputStream.close();
         }
         catch (IOException e)
         {

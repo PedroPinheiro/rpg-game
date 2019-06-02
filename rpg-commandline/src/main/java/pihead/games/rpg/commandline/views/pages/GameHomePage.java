@@ -3,7 +3,6 @@ package pihead.games.rpg.commandline.views.pages;
 import pihead.games.rpg.commandline.console.Console;
 import pihead.games.rpg.commandline.console.TextColor;
 import pihead.games.rpg.commandline.models.GameTypeModel;
-import pihead.games.rpg.commandline.resources.Resource;
 import pihead.games.rpg.commandline.responses.GameResponse;
 import pihead.games.rpg.commandline.responses.GameResponseShutdown;
 
@@ -15,11 +14,7 @@ public class GameHomePage extends Page<GameTypeModel> {
 
         clearScreen();
 
-        if (model.getId() == 1) {
-            Console.printResource(TextColor.RED, Resource.RESIDENT_EVIL);
-        } else {
-            Console.printResource(TextColor.PURPLE, Resource.SILENT_HILL);
-        }
+        Console.print(TextColor.RED, model.getTitleInputStream());
 
         Console.print(TextColor.YELLOW, "\t1. ");
         Console.println("Leon");
