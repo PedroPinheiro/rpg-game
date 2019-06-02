@@ -2,18 +2,20 @@ package pihead.games.rpg.commandline.pages;
 
 import pihead.games.rpg.commandline.console.Console;
 import pihead.games.rpg.commandline.console.TextColor;
+import pihead.games.rpg.commandline.models.Model;
+import pihead.games.rpg.commandline.responses.GameResponse;
 
 import java.util.List;
 import java.util.Scanner;
 
 // TODO: incomplete class
-public abstract class BasePage {
+public abstract class Page<T extends Model, R extends GameResponse> {
 
-    protected abstract void doShow();
+    protected abstract R doShow(T model);
 
-    public void show() {
+    public R show(T model) {
         clearScreen();
-        doShow();
+        return doShow(model);
     }
 
     protected void clearScreen() {

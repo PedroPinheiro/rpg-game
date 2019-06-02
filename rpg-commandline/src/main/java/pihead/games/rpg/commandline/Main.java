@@ -1,44 +1,23 @@
 package pihead.games.rpg.commandline;
 
-import pihead.games.rpg.commandline.console.Console;
-import pihead.games.rpg.commandline.console.TextColor;
 import pihead.games.rpg.commandline.context.ApplicationContext;
-import pihead.games.rpg.commandline.pages.InitialPage;
 
-import java.util.Scanner;
-
-// TODO: incomplete class
 public class Main {
 
-    private InitialPage initialPage;
+    private GameManager gameManager;
 
-    public Main(InitialPage initialPage) {
-        this.initialPage = initialPage;
+    public Main(GameManager gameManager) {
+        this.gameManager = gameManager;
     }
 
     private void init() {
-        initialPage.show();
+        gameManager.initGame();
     }
 
     public static void main(String[] args) {
 
-        Console.initConsole();
-
-        try {
-
-            Main main = ApplicationContext.init(Main.class);
-            main.init();
-
-        } catch (Exception ex) {
-
-            Console.println(TextColor.RED, ex.getClass().getName());
-            for (StackTraceElement stackTraceElement : ex.getStackTrace()) {
-                Console.println(TextColor.RED, "\n" + stackTraceElement);
-            }
-
-        } finally {
-            Console.initConsole();
-        }
+        Main main = ApplicationContext.init(Main.class);
+        main.init();
 
     }
 
