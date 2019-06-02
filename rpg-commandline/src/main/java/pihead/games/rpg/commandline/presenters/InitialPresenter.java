@@ -6,6 +6,7 @@ import pihead.games.rpg.commandline.models.Model;
 import pihead.games.rpg.commandline.models.OptionModel;
 import pihead.games.rpg.commandline.views.pages.InitialPage;
 import pihead.games.rpg.engine.domain.ListGameTypes;
+import pihead.games.rpg.residentevil.ResidentEvilGameLoader;
 
 import java.util.List;
 import java.util.stream.Collectors;

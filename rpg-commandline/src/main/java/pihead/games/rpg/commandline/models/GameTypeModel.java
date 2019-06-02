@@ -13,6 +13,10 @@ public class GameTypeModel implements OptionModel {
         this.name = name;
         this.titleInputStream = titleInputStream;
     }
+    public GameTypeModel(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public int getId() {
         return id;

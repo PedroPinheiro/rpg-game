@@ -2,6 +2,7 @@ package pihead.games.rpg.engine.domain.entities;
 
 import pihead.games.rpg.engine.domain.entities.characters.PlayerType;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 

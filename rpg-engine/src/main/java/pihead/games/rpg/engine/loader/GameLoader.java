@@ -35,6 +35,7 @@ public abstract class GameLoader {
     public GameType getGameType() {
 
         GameType.Builder builder = GameType.builder()
+                .id(1)
                 .name(getGameLabel());
 
         for (PlayerType playerType : getPlayerTypes()) {

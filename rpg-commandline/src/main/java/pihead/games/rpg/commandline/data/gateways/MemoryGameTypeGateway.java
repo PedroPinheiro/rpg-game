@@ -1,7 +1,10 @@
 package pihead.games.rpg.commandline.data.gateways;
 
 import pihead.games.rpg.engine.domain.entities.GameType;
+import pihead.games.rpg.engine.domain.entities.characters.PlayerType;
 import pihead.games.rpg.engine.gateway.ListGameTypeGateway;
+import pihead.games.rpg.engine.loader.GameLoader;
+import pihead.games.rpg.residentevil.ResidentEvilGameLoader;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,9 +28,12 @@ public class MemoryGameTypeGateway implements ListGameTypeGateway {
     }
 
     static {
+
+        GameLoader gameLoader = new ResidentEvilGameLoader();
+
         (new MemoryGameTypeGateway()).addAll(new ArrayList<GameType>() {{
-            add(GameType.builder().id(1).name("Resident Evil").build());
-            add(GameType.builder().id(2).name("Silent Hill").build());
+            add(gameLoader.getGameType());
+            add(GameType.builder().id(2).name("Silent Hill").addPlayerType(PlayerType.builder().id(3).build()).build());
         }});
     }
 }

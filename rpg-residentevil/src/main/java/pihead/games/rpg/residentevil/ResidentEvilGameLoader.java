@@ -42,6 +42,7 @@ public class ResidentEvilGameLoader extends GameLoader {
 
     private PlayerType buildLeon() {
         return PlayerType.builder()
+                .id(1)
                 .name("Leon")
                 .maxHealth(120)
                 .damage(10)
@@ -50,6 +51,7 @@ public class ResidentEvilGameLoader extends GameLoader {
 
     private PlayerType buildClaire() {
         return PlayerType.builder()
+                .id(2)
                 .name("Claire")
                 .maxHealth(100)
                 .minAttackDistance(3)
