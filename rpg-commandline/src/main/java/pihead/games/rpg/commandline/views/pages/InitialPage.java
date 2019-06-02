@@ -1,7 +1,6 @@
 package pihead.games.rpg.commandline.views.pages;
 
 import pihead.games.rpg.commandline.console.Console;
-import pihead.games.rpg.commandline.console.TextColor;
 import pihead.games.rpg.commandline.models.InitialModel;
 import pihead.games.rpg.commandline.models.OptionModel;
 import pihead.games.rpg.commandline.models.SelectOptionModel;
@@ -32,12 +31,6 @@ public class InitialPage extends Page<InitialModel> {
         OptionModel optionModel = selectOptionView.show(selectOptionModel);
 
         return new GameResponsePage(GamePresenter.class, optionModel);
-
-    }
-
-    private Integer selectGame(List<Integer> validOptions) {
-
-        return readOption("Game number", validOptions);
 
     }
 }

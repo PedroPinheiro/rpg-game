@@ -32,7 +32,7 @@ public class Game {
         return type;
     }
 
-    public void addStage(Stage stage) {
+    private void addStage(Stage stage) {
         if (isFirstStage()) {
             firstStage = stage;
         } else {
@@ -75,9 +75,17 @@ public class Game {
             return this;
         }
 
+        public Builder addStage(Stage stage) {
+            instance.addStage(stage);
+            return this;
+        }
+
         public Game build() {
             if (instance.id == null) {
                 throw new IllegalArgumentException("Game Id could not be null.");
+            }
+            if (instance.firstStage == null) {
+                throw new IllegalArgumentException("First Stage could not be null.");
             }
             return instance;
         }

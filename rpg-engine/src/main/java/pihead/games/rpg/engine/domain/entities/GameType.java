@@ -2,6 +2,7 @@ package pihead.games.rpg.engine.domain.entities;
 
 import pihead.games.rpg.engine.domain.entities.characters.PlayerType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameType {
@@ -9,7 +10,7 @@ public class GameType {
     private Integer id;
     private String name;
     private String description;
-    private List<PlayerType> playerTypes;
+    private List<PlayerType> playerTypes = new ArrayList<>();
 
     private GameType() {
 
@@ -61,9 +62,14 @@ public class GameType {
             return this;
         }
 
+        public Builder addPlayerType(PlayerType playerType) {
+            instance.playerTypes.add(playerType);
+            return this;
+        }
+
         public GameType build() {
-            if (instance.id == null) {
-                throw new IllegalArgumentException("Game Type Id could not be null.");
+            if (instance.playerTypes.isEmpty()) {
+                throw new IllegalArgumentException("Player Types available on Game Type could not be empty.");
             }
             return instance;
         }
