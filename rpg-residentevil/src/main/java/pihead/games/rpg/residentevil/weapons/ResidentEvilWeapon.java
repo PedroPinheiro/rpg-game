@@ -1,8 +1,8 @@
 package pihead.games.rpg.residentevil.weapons;
 
 public enum ResidentEvilWeapon {
-    SELF_DEFENSE_GUN,
+    HANDGUN,
     ASSAULT_SHOTGUN,
-    COLT_PYTON,
+    COLT_PYTHON,
     MAGNUM
 }

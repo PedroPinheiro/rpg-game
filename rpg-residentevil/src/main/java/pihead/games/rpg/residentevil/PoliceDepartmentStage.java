@@ -20,7 +20,7 @@ public class PoliceDepartmentStage implements StageLoader {
 
     private Room getHallRoom1() {
         return Room.builder()
-                .addItem(RoomSide.Direction.FRONT, buildSelfDefenseGun())
+                .addItem(RoomSide.Direction.FRONT, buildHandgun())
                 .addNextRoom(RoomSide.Direction.FRONT, getHallRoom2())
                 .build();
     }
@@ -39,7 +39,7 @@ public class PoliceDepartmentStage implements StageLoader {
                 .addEnemy(buildZombieLevel1(3))
                 .addEnemy(buildZombieLevel1(3))
                 .addItem(RoomSide.Direction.LEFT, buildGreenPlant())
-                .addItem(RoomSide.Direction.RIGHT, buildAssaltShotgun())
+                .addItem(RoomSide.Direction.RIGHT, buildAssaultShotgun())
                 .build();
     }
 
@@ -64,12 +64,14 @@ public class PoliceDepartmentStage implements StageLoader {
                 .addEnemy(buildZombieLevel2(7))
                 .addEnemy(buildZombieLevel2(8))
                 .addEnemy(buildZombieLevel3(10))
-                .addItem(RoomSide.Direction.RIGHT, buildMagnum())
+                .addItem(RoomSide.Direction.RIGHT, buildColtPython())
                 .build();
     }
 
     private Room getHallRoom5() {
         return Room.builder()
+                .addEnemy(buildZombieLevel3(7))
+                .addEnemy(buildZombieLevel3(7))
                 .addItem(RoomSide.Direction.RIGHT, buildMagnum())
                 .addNextRoom(RoomSide.Direction.RIGHT, getHallRoom6())
                 .build();

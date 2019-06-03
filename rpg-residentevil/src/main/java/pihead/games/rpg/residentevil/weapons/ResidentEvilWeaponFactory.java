@@ -12,13 +12,13 @@ public class ResidentEvilWeaponFactory {
 
     private static Map<ResidentEvilWeapon, WeaponType> weapons = new HashMap<>();
 
-    public static Weapon buildSelfDefenseGun() {
+    public static Weapon buildHandgun() {
         return Weapon.builder()
-                .type(weapons.get(SELF_DEFENSE_GUN))
+                .type(weapons.get(HANDGUN))
                 .build();
     }
 
-    public static Weapon buildAssaltShotgun() {
+    public static Weapon buildAssaultShotgun() {
         return Weapon.builder()
                 .type(weapons.get(ASSAULT_SHOTGUN))
                 .build();
@@ -26,7 +26,7 @@ public class ResidentEvilWeaponFactory {
 
     public static Weapon buildColtPython() {
         return Weapon.builder()
-                .type(weapons.get(COLT_PYTON))
+                .type(weapons.get(COLT_PYTHON))
                 .build();
     }
 
@@ -39,14 +39,14 @@ public class ResidentEvilWeaponFactory {
 
     static {
 
-        WeaponType selfDefenseGun = WeaponType.builder()
-                .name("Self Defense Gun")
+        WeaponType handgun = WeaponType.builder()
+                .name("Handgun")
                 .slots(1)
                 .damage(2)
                 .shots(10)
                 .range(10)
                 .build();
-        weapons.put(SELF_DEFENSE_GUN, selfDefenseGun);
+        weapons.put(HANDGUN, handgun);
 
         WeaponType assaultShotgun = WeaponType.builder()
                 .name("Assault Shotgun")
@@ -64,7 +64,7 @@ public class ResidentEvilWeaponFactory {
                 .shots(10)
                 .range(2)
                 .build();
-        weapons.put(COLT_PYTON, coltPython);
+        weapons.put(COLT_PYTHON, coltPython);
 
         WeaponType magnum = WeaponType.builder()
                 .name("Magnum")
