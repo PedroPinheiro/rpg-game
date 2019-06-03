@@ -7,18 +7,18 @@ public interface ListPlayerTypes {
 
     ResponseModel list(RequestModel requestModel);
 
-    default ResponseModel list(int gameTypeId) {
+    default ResponseModel list(String gameTypeId) {
         return list(new RequestModel(gameTypeId));
     }
 
     class RequestModel {
-        private int gameTypeId;
+        private String gameTypeId;
 
-        private RequestModel(int gameTypeId) {
+        private RequestModel(String gameTypeId) {
             this.gameTypeId = gameTypeId;
         }
 
-        public int getGameTypeId() {
+        public String getGameTypeId() {
             return gameTypeId;
         }
     }

@@ -102,7 +102,7 @@ public class DefaultAttackEnemyTest {
 //        final Weapon weapon = gimmeWeapon().type(weaponType).build();
 //        final Enemy enemy = gimmeEnemy().build();
 //
-//        when(getGameGateway.getById(gameId)).thenReturn(Optional.empty()); // return null game
+//        when(getGameGateway.findById(gameId)).thenReturn(Optional.empty()); // return null game
 //
 //        // when
 //        Throwable thrown = catchThrowable(() ->

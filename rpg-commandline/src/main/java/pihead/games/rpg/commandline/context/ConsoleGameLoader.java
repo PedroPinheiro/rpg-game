@@ -20,7 +20,7 @@ public abstract class ConsoleGameLoader {
         return rpgConsoleGames()
                 .filter(cg -> cg.getGameUUID().toString().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("ConsoleGame not found"));
+                .orElseThrow(() -> new RuntimeException("Console Game not found"));
     }
 
     protected abstract Stream<RpgConsoleGame> rpgConsoleGames();

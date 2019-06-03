@@ -8,9 +8,27 @@ import java.util.Map;
 
 public class GameTypeRepository {
 
-    private static Map<Integer, GameType> gameType = new HashMap<>();
+    private PlayerTypeRepository playerTypeRepository;
 
-    public Collection<GameType> listAll() {
-        return gameType.values();
+    private static Map<String, GameType> gameTypeMap = new HashMap<>();
+
+    public GameTypeRepository(PlayerTypeRepository playerTypeRepository) {
+        this.playerTypeRepository = playerTypeRepository;
+    }
+
+    public Collection<GameType> findAll() {
+        return gameTypeMap.values();
+    }
+
+    public GameType findById(String id) {
+        return gameTypeMap.get(id);
+    }
+
+    public void addAll(Collection<GameType> gameTypes) {
+        gameTypeMap.clear();
+        for (GameType type : gameTypes) {
+            gameTypeMap.put(type.getId(), type);
+            playerTypeRepository.addPlayerTypesFromGameType(type);
+        }
     }
 }

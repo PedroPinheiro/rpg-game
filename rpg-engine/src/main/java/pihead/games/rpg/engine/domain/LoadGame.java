@@ -6,23 +6,23 @@ public interface LoadGame {
 
     ResponseModel load(RequestModel requestModel);
 
-    default ResponseModel load(int gameTypeId, int playerTypeId, String playerName) {
+    default ResponseModel load(String gameTypeId, int playerTypeId, String playerName) {
         return load(new RequestModel(gameTypeId, playerTypeId, playerName));
     }
 
 
     class RequestModel {
-        private int gameTypeId;
+        private String gameTypeId;
         private int playerTypeId;
         private String playerName;
 
-        public RequestModel(int gameTypeId, int playerTypeId, String playerName) {
+        public RequestModel(String gameTypeId, int playerTypeId, String playerName) {
             this.gameTypeId = gameTypeId;
             this.playerTypeId = playerTypeId;
             this.playerName = playerName;
         }
 
-        public int getGameTypeId() {
+        public String getGameTypeId() {
             return gameTypeId;
         }
 

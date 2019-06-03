@@ -1,30 +1,31 @@
 package pihead.games.rpg.commandline.data.gateways;
 
+import pihead.games.rpg.commandline.data.repositories.GameTypeRepository;
 import pihead.games.rpg.engine.domain.entities.GameType;
 import pihead.games.rpg.engine.domain.entities.characters.PlayerType;
+import pihead.games.rpg.engine.gateway.GetGameTypeGateway;
 import pihead.games.rpg.engine.gateway.ListGameTypeGateway;
 import pihead.games.rpg.engine.loader.GameLoader;
 import pihead.games.rpg.residentevil.ResidentEvilGameLoader;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
-public class MemoryGameTypeGateway implements ListGameTypeGateway {
+public class MemoryGameTypeGateway implements ListGameTypeGateway, GetGameTypeGateway {
 
-    private static Map<String, GameType> gameTypeMap = new HashMap<>();
+    private GameTypeRepository gameTypeRepository;
+
+    public MemoryGameTypeGateway(GameTypeRepository gameTypeRepository) {
+        this.gameTypeRepository = gameTypeRepository;
+    }
 
     @Override
     public Collection<GameType> findAll() {
-        return gameTypeMap.values();
+        return gameTypeRepository.findAll();
     }
 
-    public void addAll(Collection<GameType> gameTypes) {
-        gameTypeMap.clear();
-        for (GameType type : gameTypes) {
-            gameTypeMap.put(type.getId(), type);
-        }
+    @Override
+    public Optional<GameType> findById(String gameTypeId) {
+        GameType gameType = gameTypeRepository.findById(gameTypeId);
+        return Optional.ofNullable(gameType);
     }
-
 }

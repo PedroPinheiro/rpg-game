@@ -5,5 +5,5 @@ import pihead.games.rpg.engine.loader.GameLoader;
 import java.util.Optional;
 
 public interface GetGameLoaderGateway {
-    Optional<GameLoader> getByGameTypeId(int gameTypeId);
+    Optional<GameLoader> getByGameTypeId(String gameTypeId);
 }

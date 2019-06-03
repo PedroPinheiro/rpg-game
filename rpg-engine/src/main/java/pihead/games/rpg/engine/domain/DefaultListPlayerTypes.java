@@ -27,7 +27,7 @@ public class DefaultListPlayerTypes implements ListPlayerTypes {
     }
 
     private GameType getGameType(RequestModel requestModel) {
-        return getGameTypeGateway.getById(requestModel.getGameTypeId())
+        return getGameTypeGateway.findById(requestModel.getGameTypeId())
                 .orElseThrow(() -> new RuntimeException("Game Type not found"));
     }
 
