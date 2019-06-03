@@ -8,15 +8,15 @@ import pihead.games.rpg.commandline.models.SelectOptionModel;
 import java.util.*;
 
 
-public class SelectOptionView {
+public class SelectOptionView<T extends OptionModel> {
 
-    public OptionModel show(SelectOptionModel model) {
+    public T show(SelectOptionModel<T> model) {
 
-        List<OptionModel> options = model.getOptions();
-        Map<Integer, OptionModel> validOptions = new HashMap<>();
+        List<T> options = model.getOptions();
+        Map<Integer, T> validOptions = new HashMap<>();
 
         for (int i = 1; i <= options.size(); i++) {
-            OptionModel option = options.get(i-1);
+            T option = options.get(i-1);
             Console.print(TextColor.YELLOW, "\t" + i + ". ");
             Console.println(option.getName());
             validOptions.put(i, option);
@@ -28,7 +28,7 @@ public class SelectOptionView {
 
     }
 
-    private OptionModel readOption(String label, Map<Integer, OptionModel> validOptions) {
+    private T readOption(String label, Map<Integer, T> validOptions) {
 
         System.out.print(label + ": ");
         Scanner scanner = new Scanner(System.in);

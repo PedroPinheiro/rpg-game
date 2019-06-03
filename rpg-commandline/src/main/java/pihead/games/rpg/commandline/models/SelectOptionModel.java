@@ -2,12 +2,12 @@ package pihead.games.rpg.commandline.models;
 
 import java.util.List;
 
-public class SelectOptionModel implements Model {
+public class SelectOptionModel<T extends OptionModel> implements Model {
 
     private String label;
-    private List<OptionModel> options;
+    private List<T> options;
 
-    public SelectOptionModel(String label, List<OptionModel> options) {
+    public SelectOptionModel(String label, List<T> options) {
         this.label = label;
         this.options = options;
     }
@@ -16,7 +16,7 @@ public class SelectOptionModel implements Model {
         return label;
     }
 
-    public List<OptionModel> getOptions() {
+    public List<T> getOptions() {
         return options;
     }
 }

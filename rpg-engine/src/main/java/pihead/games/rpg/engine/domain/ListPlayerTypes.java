@@ -47,8 +47,8 @@ public interface ListPlayerTypes {
                 instance = new ResponseModel();
             }
 
-            public Builder addPlayerType(String name, int maxHealth) {
-                PlayerTypeModel playerTypeModel = new PlayerTypeModel(name, maxHealth);
+            public Builder addPlayerType(int id, String name, int maxHealth) {
+                PlayerTypeModel playerTypeModel = new PlayerTypeModel(id, name, maxHealth);
                 instance.playerTypes.add(playerTypeModel);
                 return this;
             }
@@ -58,13 +58,19 @@ public interface ListPlayerTypes {
             }
         }
 
-        static class PlayerTypeModel {
+        public static class PlayerTypeModel {
+            private int id;
             private String name;
             private int maxHealth;
 
-            private PlayerTypeModel(String name, int maxHealth) {
+            private PlayerTypeModel(int id, String name, int maxHealth) {
+                this.id = id;
                 this.name = name;
                 this.maxHealth = maxHealth;
+            }
+
+            public int getId() {
+                return id;
             }
 
             public String getName() {

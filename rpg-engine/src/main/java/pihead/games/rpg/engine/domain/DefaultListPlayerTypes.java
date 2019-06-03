@@ -20,7 +20,7 @@ public class DefaultListPlayerTypes implements ListPlayerTypes {
         ResponseModel.Builder builder = ResponseModel.builder();
 
         for (PlayerType playerType : gameType.getPlayerTypes()) {
-            builder.addPlayerType(playerType.getName(), playerType.getMaxHealth());
+            builder.addPlayerType(playerType.getId(), playerType.getName(), playerType.getMaxHealth());
         }
 
         return builder.build();

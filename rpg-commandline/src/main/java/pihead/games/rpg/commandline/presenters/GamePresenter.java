@@ -3,23 +3,30 @@ package pihead.games.rpg.commandline.presenters;
 import pihead.games.rpg.commandline.context.ConsoleGameLoader;
 import pihead.games.rpg.commandline.models.GameTypeModel;
 import pihead.games.rpg.commandline.models.Model;
-import pihead.games.rpg.commandline.views.pages.GameHomePage;
+import pihead.games.rpg.commandline.models.PlayerTypeModel;
+import pihead.games.rpg.commandline.views.pages.SelectPlayerPage;
 import pihead.games.rpg.console.engine.RpgConsoleGame;
-import pihead.games.rpg.residentevil.ResidentEvilConsoleGame;
+import pihead.games.rpg.engine.domain.ListPlayerTypes;
 
-public class GamePresenter implements Presenter<GameHomePage, GameTypeModel> {
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class GamePresenter implements Presenter<SelectPlayerPage, GameTypeModel> {
 
     private ConsoleGameLoader consoleGameLoader;
-    private GameHomePage gameHomePage;
+    private SelectPlayerPage selectPlayerPage;
+    private ListPlayerTypes listPlayerTypes;
 
     public GamePresenter(ConsoleGameLoader consoleGameLoader,
-                         GameHomePage gameHomePage) {
+                         SelectPlayerPage selectPlayerPage,
+                         ListPlayerTypes listPlayerTypes) {
         this.consoleGameLoader = consoleGameLoader;
-        this.gameHomePage = gameHomePage;
+        this.selectPlayerPage = selectPlayerPage;
+        this.listPlayerTypes = listPlayerTypes;
     }
 
-    public GameHomePage getPage() {
-        return gameHomePage;
+    public SelectPlayerPage getPage() {
+        return selectPlayerPage;
     }
 
     @Override
@@ -39,7 +46,18 @@ public class GamePresenter implements Presenter<GameHomePage, GameTypeModel> {
 
         RpgConsoleGame consoleGame = consoleGameLoader.getConsoleGame(model.getId());
 
-        return new GameTypeModel(model.getId(), model.getName(), consoleGame.getTitle());
+        List<PlayerTypeModel> playerTypes = getPlayerTypesModelList(model);
+
+        return new GameTypeModel(model.getId(),
+                model.getName(),
+                consoleGame.getTitle(),
+                playerTypes);
+    }
+
+    private List<PlayerTypeModel> getPlayerTypesModelList(GameTypeModel model) {
+        return listPlayerTypes.list(model.getId()).getPlayerTypes().stream()
+                .map(pt -> new PlayerTypeModel(pt.getId(), pt.getName(), pt.getMaxHealth()))
+                .collect(Collectors.toList());
     }
 
 }

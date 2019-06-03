@@ -8,7 +8,6 @@ import pihead.games.rpg.commandline.responses.GameResponse;
 import java.util.List;
 import java.util.Scanner;
 
-// TODO: incomplete class
 public abstract class Page<T extends Model> {
 
     protected abstract GameResponse doShow(T model);

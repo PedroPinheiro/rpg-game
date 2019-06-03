@@ -4,33 +4,33 @@ import pihead.games.rpg.commandline.models.GameTypeModel;
 import pihead.games.rpg.commandline.models.InitialModel;
 import pihead.games.rpg.commandline.models.Model;
 import pihead.games.rpg.commandline.models.OptionModel;
-import pihead.games.rpg.commandline.views.pages.InitialPage;
+import pihead.games.rpg.commandline.views.pages.SelectGamePage;
 import pihead.games.rpg.engine.domain.ListGameTypes;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class InitialPresenter implements Presenter<InitialPage, InitialModel> {
+public class InitialPresenter implements Presenter<SelectGamePage, InitialModel> {
 
     private ListGameTypes listGameTypes;
-    private InitialPage initialPage;
+    private SelectGamePage selectGamePage;
 
     public InitialPresenter(ListGameTypes listGameTypes,
-                            InitialPage initialPage) {
+                            SelectGamePage selectGamePage) {
         this.listGameTypes = listGameTypes;
-        this.initialPage = initialPage;
+        this.selectGamePage = selectGamePage;
     }
 
-    public InitialPage getPage() {
+    public SelectGamePage getPage() {
 
-        return initialPage;
+        return selectGamePage;
     }
 
     public InitialModel getModel(Model i) {
 
         ListGameTypes.ResponseModel responseModel = listGameTypes.list();
 
-        List<OptionModel> options = responseModel.getGameTypes().stream()
+        List<GameTypeModel> options = responseModel.getGameTypes().stream()
                 .map(gt -> new GameTypeModel(gt.getId(), gt.getName()))
                 .collect(Collectors.toList());
 

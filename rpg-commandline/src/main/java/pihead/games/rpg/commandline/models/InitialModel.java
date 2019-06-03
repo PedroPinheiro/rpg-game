@@ -4,13 +4,13 @@ import java.util.List;
 
 public class InitialModel implements Model {
 
-    private List<OptionModel> gameOptions;
+    private List<GameTypeModel> gameOptions;
 
-    public InitialModel(List<OptionModel> gameOptions) {
+    public InitialModel(List<GameTypeModel> gameOptions) {
         this.gameOptions = gameOptions;
     }
 
-    public List<OptionModel> getGameOptions() {
+    public List<GameTypeModel> getGameOptions() {
         return gameOptions;
     }
 }
