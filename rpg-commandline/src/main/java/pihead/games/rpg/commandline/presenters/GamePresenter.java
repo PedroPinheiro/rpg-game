@@ -3,6 +3,7 @@ package pihead.games.rpg.commandline.presenters;
 import pihead.games.rpg.commandline.context.ConsoleGameLoader;
 import pihead.games.rpg.commandline.models.GameTypeModel;
 import pihead.games.rpg.commandline.models.Model;
+import pihead.games.rpg.commandline.models.OptionModel;
 import pihead.games.rpg.commandline.models.PlayerTypeModel;
 import pihead.games.rpg.commandline.pages.SelectPlayerPage;
 import pihead.games.rpg.console.engine.RpgConsoleGame;
@@ -46,7 +47,7 @@ public class GamePresenter implements Presenter<SelectPlayerPage, GameTypeModel>
 
         RpgConsoleGame consoleGame = consoleGameLoader.getConsoleGame(model.getId());
 
-        List<PlayerTypeModel> playerTypes = getPlayerTypesModelList(model);
+        List<OptionModel> playerTypes = getPlayerTypesModelList(model);
 
         return new GameTypeModel(model.getId(),
                 model.getName(),
@@ -54,7 +55,7 @@ public class GamePresenter implements Presenter<SelectPlayerPage, GameTypeModel>
                 playerTypes);
     }
 
-    private List<PlayerTypeModel> getPlayerTypesModelList(GameTypeModel model) {
+    private List<OptionModel> getPlayerTypesModelList(GameTypeModel model) {
         return listPlayerTypes.list(model.getId()).getPlayerTypes().stream()
                 .map(pt -> new PlayerTypeModel(pt.getId(), pt.getName(), pt.getMaxHealth()))
                 .collect(Collectors.toList());

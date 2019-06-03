@@ -3,6 +3,7 @@ package pihead.games.rpg.commandline.presenters;
 import pihead.games.rpg.commandline.models.GameTypeModel;
 import pihead.games.rpg.commandline.models.InitialModel;
 import pihead.games.rpg.commandline.models.Model;
+import pihead.games.rpg.commandline.models.OptionModel;
 import pihead.games.rpg.commandline.pages.SelectGamePage;
 import pihead.games.rpg.engine.domain.ListGameTypes;
 
@@ -29,7 +30,7 @@ public class InitialPresenter implements Presenter<SelectGamePage, InitialModel>
 
         ListGameTypes.ResponseModel responseModel = listGameTypes.list();
 
-        List<GameTypeModel> options = responseModel.getGameTypes().stream()
+        List<OptionModel> options = responseModel.getGameTypes().stream()
                 .map(gt -> new GameTypeModel(gt.getId(), gt.getName()))
                 .collect(Collectors.toList());
 

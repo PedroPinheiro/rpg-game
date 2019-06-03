@@ -8,9 +8,9 @@ public class GameTypeModel implements OptionModel {
     private String id;
     private String name;
     private InputStream titleInputStream;
-    private List<PlayerTypeModel> playerTypeModels;
+    private List<OptionModel> playerTypeModels;
 
-    public GameTypeModel(String id, String name, InputStream titleInputStream, List<PlayerTypeModel> playerTypeModels) {
+    public GameTypeModel(String id, String name, InputStream titleInputStream, List<OptionModel> playerTypeModels) {
         this.id = id;
         this.name = name;
         this.titleInputStream = titleInputStream;
@@ -33,7 +33,7 @@ public class GameTypeModel implements OptionModel {
         return titleInputStream;
     }
 
-    public List<PlayerTypeModel> getPlayerTypeModels() {
+    public List<OptionModel> getPlayerTypeModels() {
         return playerTypeModels;
     }
 }

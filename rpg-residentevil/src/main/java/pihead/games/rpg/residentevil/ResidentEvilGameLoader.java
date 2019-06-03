@@ -3,7 +3,6 @@ package pihead.games.rpg.residentevil;
 import pihead.games.rpg.engine.domain.entities.characters.PlayerType;
 import pihead.games.rpg.engine.loader.GameLoader;
 import pihead.games.rpg.engine.loader.StageLoader;
-import pihead.games.rpg.residentevil.stages.first.PoliceDepartmentStage;
 
 import java.util.ArrayList;
 import java.util.Collection;

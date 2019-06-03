@@ -29,6 +29,7 @@ dependencies {
 
     compile(
         project(':rpg-engine'),
+        project(':rpg-console-engine'),
         project(':rpg-residentevil')
     )
 }

@@ -2,10 +2,7 @@ package pihead.games.rpg.commandline.pages;
 
 import pihead.games.rpg.commandline.console.Console;
 import pihead.games.rpg.commandline.console.TextColor;
-import pihead.games.rpg.commandline.models.GameTypeModel;
-import pihead.games.rpg.commandline.models.OptionModel;
-import pihead.games.rpg.commandline.models.PlayerTypeModel;
-import pihead.games.rpg.commandline.models.SelectOptionModel;
+import pihead.games.rpg.commandline.models.*;
 import pihead.games.rpg.commandline.presenters.PlayerNamePresenter;
 import pihead.games.rpg.commandline.responses.GameResponse;
 import pihead.games.rpg.commandline.responses.GameResponsePage;
@@ -29,9 +26,9 @@ public class SelectPlayerPage extends Page<GameTypeModel> {
 
         Console.print(TextColor.RED, model.getTitleInputStream());
 
-        List<PlayerTypeModel> options = model.getPlayerTypeModels();
+        List<OptionModel> options = model.getPlayerTypeModels();
 
-        SelectOptionModel selectOptionModel = new SelectOptionModel<>("Player number", options);
+        SelectOptionModel selectOptionModel = new SelectOptionModel("Player number", options);
 
         OptionModel optionModel = selectOptionView.show(selectOptionModel);
 

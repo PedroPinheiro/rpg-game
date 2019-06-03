@@ -25,9 +25,9 @@ public class SelectGamePage extends Page<InitialModel> {
 
         Console.print(Resource.PIHEAD_GAMES);
 
-        List<GameTypeModel> options = model.getGameOptions();
+        List<OptionModel> options = model.getGameOptions();
 
-        SelectOptionModel selectOptionModel = new SelectOptionModel<>("Game number", options);
+        SelectOptionModel selectOptionModel = new SelectOptionModel("Game number", options);
 
         OptionModel optionModel = selectOptionView.show(selectOptionModel);
 
