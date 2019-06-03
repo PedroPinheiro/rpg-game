@@ -2,7 +2,7 @@
 
 This is a Text based RPG game.
 
-Its composed of the following modules:
+It's composed of the following modules:
 
 - rpg-engine
 - rpg-console-engine
