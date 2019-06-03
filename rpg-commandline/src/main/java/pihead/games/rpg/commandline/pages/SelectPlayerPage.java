@@ -35,6 +35,13 @@ public class SelectPlayerPage extends Page<GameTypeModel> {
 
         OptionModel optionModel = selectOptionView.show(selectOptionModel);
 
+        Console.print("Your name: ");
+        Console.print("Your name: ");
+        String playerName = readLine();
+
+
+        readLine();
+
         return new GameResponsePage(PlayerNamePresenter.class, optionModel);
 
     }

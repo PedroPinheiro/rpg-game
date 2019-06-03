@@ -8,7 +8,7 @@ import pihead.games.rpg.commandline.models.SelectOptionModel;
 import java.util.*;
 
 
-public class SelectOptionView<T extends OptionModel> {
+public class SelectOptionView<T extends OptionModel> implements View<SelectOptionModel<T>, T> {
 
     public T show(SelectOptionModel<T> model) {
 
