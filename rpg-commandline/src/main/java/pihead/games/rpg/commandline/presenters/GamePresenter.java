@@ -4,7 +4,7 @@ import pihead.games.rpg.commandline.context.ConsoleGameLoader;
 import pihead.games.rpg.commandline.models.GameTypeModel;
 import pihead.games.rpg.commandline.models.Model;
 import pihead.games.rpg.commandline.models.PlayerTypeModel;
-import pihead.games.rpg.commandline.views.pages.SelectPlayerPage;
+import pihead.games.rpg.commandline.pages.SelectPlayerPage;
 import pihead.games.rpg.console.engine.RpgConsoleGame;
 import pihead.games.rpg.engine.domain.ListPlayerTypes;
 

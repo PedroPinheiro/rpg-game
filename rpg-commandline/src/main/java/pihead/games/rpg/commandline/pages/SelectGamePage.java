@@ -1,4 +1,4 @@
-package pihead.games.rpg.commandline.views.pages;
+package pihead.games.rpg.commandline.pages;
 
 import pihead.games.rpg.commandline.console.Console;
 import pihead.games.rpg.commandline.models.GameTypeModel;

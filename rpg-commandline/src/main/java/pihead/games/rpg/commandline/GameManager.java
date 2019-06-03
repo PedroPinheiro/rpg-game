@@ -1,14 +1,12 @@
 package pihead.games.rpg.commandline;
 
-import pihead.games.rpg.commandline.config.ConfigProperties;
 import pihead.games.rpg.commandline.console.Console;
 import pihead.games.rpg.commandline.console.TextColor;
 import pihead.games.rpg.commandline.context.ApplicationContext;
 import pihead.games.rpg.commandline.context.ConsoleGameLoader;
-import pihead.games.rpg.commandline.data.gateways.MemoryGameTypeGateway;
 import pihead.games.rpg.commandline.data.repositories.GameTypeRepository;
 import pihead.games.rpg.commandline.models.Model;
-import pihead.games.rpg.commandline.views.pages.Page;
+import pihead.games.rpg.commandline.pages.Page;
 import pihead.games.rpg.commandline.responses.GameResponse;
 import pihead.games.rpg.commandline.responses.GameResponsePage;
 import pihead.games.rpg.commandline.presenters.InitialPresenter;

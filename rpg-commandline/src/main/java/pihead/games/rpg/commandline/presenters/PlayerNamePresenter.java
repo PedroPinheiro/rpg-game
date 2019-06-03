@@ -2,7 +2,7 @@ package pihead.games.rpg.commandline.presenters;
 
 import pihead.games.rpg.commandline.models.Model;
 import pihead.games.rpg.commandline.models.PlayerTypeModel;
-import pihead.games.rpg.commandline.views.pages.PlayerNamePage;
+import pihead.games.rpg.commandline.pages.PlayerNamePage;
 
 public class PlayerNamePresenter implements Presenter<PlayerNamePage, PlayerTypeModel> {
 

@@ -3,8 +3,7 @@ package pihead.games.rpg.commandline.presenters;
 import pihead.games.rpg.commandline.models.GameTypeModel;
 import pihead.games.rpg.commandline.models.InitialModel;
 import pihead.games.rpg.commandline.models.Model;
-import pihead.games.rpg.commandline.models.OptionModel;
-import pihead.games.rpg.commandline.views.pages.SelectGamePage;
+import pihead.games.rpg.commandline.pages.SelectGamePage;
 import pihead.games.rpg.engine.domain.ListGameTypes;
 
 import java.util.List;
