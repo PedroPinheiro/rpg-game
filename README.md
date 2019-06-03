@@ -45,3 +45,12 @@ The command line rpg game application. It uses the `rpg-engine`, `rpg-console-en
 
 A example of game. Depends on `rpg-engine` and `rpg-console-engine`.
 
+# Run
+
+1. Download the release
+2. Unzip
+3. `cd {release path}` 
+3. Execute
+    - Mac/Linux: `./bin/rpg-commandline`
+    - Windows: `\bin\rpg-commandline.bat`
+
