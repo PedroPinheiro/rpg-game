@@ -1,37 +1,28 @@
-package pihead.games.rpg.commandline.presenters;
+package pihead.games.rpg.commandline.selectPlayer;
 
 import pihead.games.rpg.commandline.context.ConsoleGameLoader;
 import pihead.games.rpg.commandline.models.GameTypeModel;
 import pihead.games.rpg.commandline.models.Model;
 import pihead.games.rpg.commandline.models.OptionModel;
 import pihead.games.rpg.commandline.models.PlayerTypeModel;
-import pihead.games.rpg.commandline.pages.SelectPlayerPage;
 import pihead.games.rpg.console.engine.RpgConsoleGame;
 import pihead.games.rpg.engine.domain.ListPlayerTypes;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GamePresenter implements Presenter<SelectPlayerPage, GameTypeModel> {
+public class SelectPlayerPresenter {
 
     private ConsoleGameLoader consoleGameLoader;
-    private SelectPlayerPage selectPlayerPage;
     private ListPlayerTypes listPlayerTypes;
 
-    public GamePresenter(ConsoleGameLoader consoleGameLoader,
-                         SelectPlayerPage selectPlayerPage,
-                         ListPlayerTypes listPlayerTypes) {
+    public SelectPlayerPresenter(ConsoleGameLoader consoleGameLoader,
+                                 ListPlayerTypes listPlayerTypes) {
         this.consoleGameLoader = consoleGameLoader;
-        this.selectPlayerPage = selectPlayerPage;
         this.listPlayerTypes = listPlayerTypes;
     }
 
-    public SelectPlayerPage getPage() {
-        return selectPlayerPage;
-    }
-
-    @Override
-    public GameTypeModel getModel(Model requestModel) {
+    public Model getModel(Model requestModel) {
 
         if (!(requestModel instanceof GameTypeModel)) {
             throw new RuntimeException();

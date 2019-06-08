@@ -2,17 +2,18 @@ package pihead.games.rpg.commandline.context;
 
 import pihead.games.rpg.commandline.GameManager;
 import pihead.games.rpg.commandline.Main;
+import pihead.games.rpg.commandline.PageManager;
 import pihead.games.rpg.commandline.data.gateways.MemoryGameTypeGateway;
 import pihead.games.rpg.commandline.data.gateways.MemoryPlayerTypeGateway;
 import pihead.games.rpg.commandline.data.repositories.GameTypeRepository;
 import pihead.games.rpg.commandline.data.repositories.PlayerTypeRepository;
 import pihead.games.rpg.commandline.presenters.PlayerNamePresenter;
 import pihead.games.rpg.commandline.views.SelectOptionView;
-import pihead.games.rpg.commandline.pages.PlayerNamePage;
-import pihead.games.rpg.commandline.pages.SelectPlayerPage;
-import pihead.games.rpg.commandline.pages.SelectGamePage;
-import pihead.games.rpg.commandline.presenters.GamePresenter;
-import pihead.games.rpg.commandline.presenters.InitialPresenter;
+import pihead.games.rpg.commandline.views.pages.PlayerNamePage;
+import pihead.games.rpg.commandline.selectPlayer.SelectPlayerPage;
+import pihead.games.rpg.commandline.selectGame.SelectGamePage;
+import pihead.games.rpg.commandline.selectPlayer.SelectPlayerPresenter;
+import pihead.games.rpg.commandline.selectGame.SelectGamePresenter;
 import pihead.games.rpg.engine.domain.DefaultListGameTypes;
 import pihead.games.rpg.engine.domain.DefaultListPlayerTypes;
 import pihead.games.rpg.engine.domain.ListGameTypes;
@@ -72,12 +73,25 @@ public class ApplicationContext {
 
     }
 
+    private static void registerPresenters() {
+
+        SelectPlayerPresenter selectPlayerPresenter = new SelectPlayerPresenter(get(ConsoleGameLoader.class), get(ListPlayerTypes.class));
+        put(SelectPlayerPresenter.class, selectPlayerPresenter);
+
+        SelectGamePresenter selectGamePresenter = new SelectGamePresenter(get(ListGameTypes.class));
+        put(SelectGamePresenter.class, selectGamePresenter);
+
+        PlayerNamePresenter playerNamePresenter = new PlayerNamePresenter(get(PlayerNamePage.class));
+        put(PlayerNamePresenter.class, playerNamePresenter);
+
+    }
+
     private static void registerPages() {
 
-        SelectGamePage selectGamePage = new SelectGamePage(get(SelectOptionView.class));
+        SelectGamePage selectGamePage = new SelectGamePage(get(SelectGamePresenter.class), get(SelectOptionView.class));
         put(SelectGamePage.class, selectGamePage);
 
-        SelectPlayerPage selectPlayerPage = new SelectPlayerPage(get(SelectOptionView.class));
+        SelectPlayerPage selectPlayerPage = new SelectPlayerPage(get(SelectPlayerPresenter.class), get(SelectOptionView.class));
         put(SelectPlayerPage.class, selectPlayerPage);
 
         PlayerNamePage playerNamePage = new PlayerNamePage();
@@ -85,24 +99,14 @@ public class ApplicationContext {
 
     }
 
-    private static void registerPresenters() {
-
-        GamePresenter gamePresenter = new GamePresenter(get(ConsoleGameLoader.class), get(SelectPlayerPage.class), get(ListPlayerTypes.class));
-        put(GamePresenter.class, gamePresenter);
-
-        InitialPresenter initialPresenter = new InitialPresenter(get(ListGameTypes.class), get(SelectGamePage.class));
-        put(InitialPresenter.class, initialPresenter);
-
-        PlayerNamePresenter playerNamePresenter = new PlayerNamePresenter(get(PlayerNamePage.class));
-        put(PlayerNamePresenter.class, playerNamePresenter);
-
-    }
-
     private static void registerMain() {
+
+        PageManager pageManager = new PageManager();
+        put(PageManager.class, pageManager);
 
         GameManager gameManager = new GameManager(get(GameTypeRepository.class),
                 get(ConsoleGameLoader.class),
-                get(InitialPresenter.class));
+                get(PageManager.class));
 
         put(GameManager.class, gameManager);
 
@@ -127,8 +131,8 @@ public class ApplicationContext {
         registerGateways();
         registerUsecases();
         registerViews();
-        registerPages();
         registerPresenters();
+        registerPages();
         registerMain();
 
         return get(Main.class);

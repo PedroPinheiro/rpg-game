@@ -3,6 +3,7 @@ package pihead.games.rpg.commandline.console;
 import pihead.games.rpg.commandline.resources.Resource;
 
 import java.io.*;
+import java.util.Scanner;
 
 public class Console {
 
@@ -86,6 +87,17 @@ public class Console {
         }
 
         System.out.println();
+    }
+
+    public static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
+    public static String readLine() {
+
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
     }
 
 }

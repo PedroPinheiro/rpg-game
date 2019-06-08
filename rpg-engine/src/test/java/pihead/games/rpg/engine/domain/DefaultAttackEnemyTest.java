@@ -120,7 +120,6 @@ public class DefaultAttackEnemyTest {
     public void weaponNotFound() {
 
         // given
-        final Game game = gimmeGame().build();
         final int weaponId = 1;
         final Enemy enemy = gimmeEnemy().build();
 
@@ -142,7 +141,6 @@ public class DefaultAttackEnemyTest {
     public void enemyNotFound() {
 
         // given
-        final Game game = gimmeGame().build();
         final WeaponType weaponType = gimmeWeaponType().build();
         final Weapon weapon = gimmeWeapon().type(weaponType).build();
         final int enemyId = 1;

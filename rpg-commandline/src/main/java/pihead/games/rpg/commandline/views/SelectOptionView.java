@@ -30,13 +30,14 @@ public class SelectOptionView implements View<SelectOptionModel, OptionModel> {
 
     private OptionModel readOption(String label, Map<Integer, OptionModel> validOptions) {
 
-        System.out.print(label + ": ");
         Scanner scanner = new Scanner(System.in);
 
         Integer option = -1;
         boolean notRead = true;
 
         while (notRead) {
+
+            Console.print(label + ": ");
 
             try {
                 System.out.print(TextColor.YELLOW_BOLD.getAnsi());

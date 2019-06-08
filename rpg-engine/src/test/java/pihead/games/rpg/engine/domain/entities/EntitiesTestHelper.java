@@ -11,13 +11,23 @@ public final class EntitiesTestHelper {
     public static Game.Builder gimmeGame() {
         return Game.builder()
                 .id(nextPositiveInt())
-                .type(gimmeGameType().build());
+                .type(gimmeGameType().build())
+                .addStage(gimmeStage().build());
     }
+
     public static GameType.Builder gimmeGameType() {
         return GameType.builder()
+                .id(nextString())
+                .name(nextString())
+                .description(nextString())
+                .addPlayerType(gimmePlayerType().build());
+    }
+
+    public static Stage.Builder gimmeStage() {
+        return Stage.builder()
                 .id(nextPositiveInt())
                 .name(nextString())
-                .description(nextString());
+                .addFirstRoom(gimmeRoom().build());
     }
 
     public static Weapon.Builder gimmeWeapon() {

@@ -1,5 +1,7 @@
 package pihead.games.rpg.commandline.config;
 
+import pihead.games.rpg.commandline.console.Console;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -26,8 +28,6 @@ public class ConfigProperties {
                     throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
                 }
 
-//                saveGames(prop);
-
                 started = true;
 
                 // TODO: log
@@ -41,8 +41,8 @@ public class ConfigProperties {
                     inputStream.close();
                 }
             }
-        } catch (Exception e) {
-//            System.out.println("Exception: " + e);
+        } catch (Exception ex) {
+            Console.println("some problem here!");
         }
 
     }
@@ -53,6 +53,7 @@ public class ConfigProperties {
     }
 
     private static void ensureStarted() {
+
         if (!started) {
             init();
         }
