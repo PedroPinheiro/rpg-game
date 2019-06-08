@@ -5,6 +5,7 @@ import pihead.games.rpg.commandline.context.ApplicationContext;
 import pihead.games.rpg.commandline.responses.Intent;
 import pihead.games.rpg.commandline.views.Page;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class PageManager {
@@ -37,12 +38,23 @@ public class PageManager {
         if (action == Intent.Action.GO_BACK) {
             goBack();
         }
+        else if (action == Intent.Action.EXIT_GAME) {
+            exitGame();
+        }
     }
 
     private void goBack() {
         pageHistory.pop();
-        Intent intent = pageHistory.peek();
-        showPage(intent);
+        try {
+            Intent intent = pageHistory.peek();
+            showPage(intent);
+        } catch(EmptyStackException ex) {
+            exitGame();
+        }
+    }
+
+    private void exitGame() {
+        System.exit(1);
     }
 
     private Page getPage(Intent intent) {

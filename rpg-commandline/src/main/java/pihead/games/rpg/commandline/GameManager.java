@@ -5,7 +5,7 @@ import pihead.games.rpg.commandline.console.TextColor;
 import pihead.games.rpg.commandline.context.ConsoleGameLoader;
 import pihead.games.rpg.commandline.data.repositories.GameTypeRepository;
 import pihead.games.rpg.commandline.responses.Intent;
-import pihead.games.rpg.commandline.selectGame.SelectGamePage;
+import pihead.games.rpg.commandline.pages.selectGame.SelectGamePage;
 import pihead.games.rpg.engine.domain.entities.GameType;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package pihead.games.rpg.commandline.selectPlayer;
+package pihead.games.rpg.commandline.pages.selectPlayer;
 
 import pihead.games.rpg.commandline.context.ConsoleGameLoader;
 import pihead.games.rpg.commandline.models.GameTypeModel;

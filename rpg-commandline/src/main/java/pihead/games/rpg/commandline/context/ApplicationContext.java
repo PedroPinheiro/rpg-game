@@ -7,13 +7,13 @@ import pihead.games.rpg.commandline.data.gateways.MemoryGameTypeGateway;
 import pihead.games.rpg.commandline.data.gateways.MemoryPlayerTypeGateway;
 import pihead.games.rpg.commandline.data.repositories.GameTypeRepository;
 import pihead.games.rpg.commandline.data.repositories.PlayerTypeRepository;
-import pihead.games.rpg.commandline.presenters.PlayerNamePresenter;
+import pihead.games.rpg.commandline.pages.playerName.PlayerNamePresenter;
 import pihead.games.rpg.commandline.views.SelectOptionView;
-import pihead.games.rpg.commandline.views.pages.PlayerNamePage;
-import pihead.games.rpg.commandline.selectPlayer.SelectPlayerPage;
-import pihead.games.rpg.commandline.selectGame.SelectGamePage;
-import pihead.games.rpg.commandline.selectPlayer.SelectPlayerPresenter;
-import pihead.games.rpg.commandline.selectGame.SelectGamePresenter;
+import pihead.games.rpg.commandline.pages.playerName.PlayerNamePage;
+import pihead.games.rpg.commandline.pages.selectPlayer.SelectPlayerPage;
+import pihead.games.rpg.commandline.pages.selectGame.SelectGamePage;
+import pihead.games.rpg.commandline.pages.selectPlayer.SelectPlayerPresenter;
+import pihead.games.rpg.commandline.pages.selectGame.SelectGamePresenter;
 import pihead.games.rpg.engine.domain.DefaultListGameTypes;
 import pihead.games.rpg.engine.domain.DefaultListPlayerTypes;
 import pihead.games.rpg.engine.domain.ListGameTypes;
@@ -81,7 +81,7 @@ public class ApplicationContext {
         SelectGamePresenter selectGamePresenter = new SelectGamePresenter(get(ListGameTypes.class));
         put(SelectGamePresenter.class, selectGamePresenter);
 
-        PlayerNamePresenter playerNamePresenter = new PlayerNamePresenter(get(PlayerNamePage.class));
+        PlayerNamePresenter playerNamePresenter = new PlayerNamePresenter();
         put(PlayerNamePresenter.class, playerNamePresenter);
 
     }
@@ -94,7 +94,7 @@ public class ApplicationContext {
         SelectPlayerPage selectPlayerPage = new SelectPlayerPage(get(SelectPlayerPresenter.class), get(SelectOptionView.class));
         put(SelectPlayerPage.class, selectPlayerPage);
 
-        PlayerNamePage playerNamePage = new PlayerNamePage();
+        PlayerNamePage playerNamePage = new PlayerNamePage(get(PlayerNamePresenter.class));
         put(PlayerNamePage.class, playerNamePage);
 
     }

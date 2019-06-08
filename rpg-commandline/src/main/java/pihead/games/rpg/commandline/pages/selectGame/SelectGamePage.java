@@ -1,13 +1,10 @@
-package pihead.games.rpg.commandline.selectGame;
+package pihead.games.rpg.commandline.pages.selectGame;
 
 import pihead.games.rpg.commandline.console.Console;
-import pihead.games.rpg.commandline.models.InitialModel;
-import pihead.games.rpg.commandline.models.Model;
-import pihead.games.rpg.commandline.models.OptionModel;
-import pihead.games.rpg.commandline.models.SelectOptionModel;
+import pihead.games.rpg.commandline.models.*;
 import pihead.games.rpg.commandline.responses.Intent;
 import pihead.games.rpg.commandline.resources.Resource;
-import pihead.games.rpg.commandline.selectPlayer.SelectPlayerPage;
+import pihead.games.rpg.commandline.pages.selectPlayer.SelectPlayerPage;
 import pihead.games.rpg.commandline.views.Page;
 import pihead.games.rpg.commandline.views.SelectOptionView;
 
@@ -37,11 +34,21 @@ public class SelectGamePage implements Page {
 
         List<OptionModel> options = model.getGameOptions();
 
+        options.add(new BackPageModel());
+
         SelectOptionModel selectOptionModel = new SelectOptionModel("Game number", options);
 
-        OptionModel optionModel = selectOptionView.show(selectOptionModel);
+        OptionModel option = selectOptionView.show(selectOptionModel);
 
-        return new Intent(SelectPlayerPage.class, optionModel);
+        return buildIntent(option);
 
+    }
+
+    private Intent buildIntent(OptionModel option) {
+
+        if (option instanceof BackPageModel)
+            return new Intent(Intent.Action.GO_BACK);
+        else
+            return new Intent(SelectPlayerPage.class, option);
     }
 }

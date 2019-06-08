@@ -1,4 +1,4 @@
-package pihead.games.rpg.commandline.selectGame;
+package pihead.games.rpg.commandline.pages.selectGame;
 
 import pihead.games.rpg.commandline.models.*;
 import pihead.games.rpg.engine.domain.ListGameTypes;

@@ -4,9 +4,7 @@ import java.io.InputStream;
 
 public enum Resource {
 
-    PIHEAD_GAMES("pihead-games.txt"),
-    RESIDENT_EVIL("resident-evil.txt"),
-    SILENT_HILL("silent-hill.txt");
+    PIHEAD_GAMES("pihead-games.txt");
 
     private String path;
 

@@ -1,12 +1,12 @@
-package pihead.games.rpg.commandline.selectPlayer;
+package pihead.games.rpg.commandline.pages.selectPlayer;
 
 import pihead.games.rpg.commandline.console.Console;
 import pihead.games.rpg.commandline.console.TextColor;
 import pihead.games.rpg.commandline.models.*;
+import pihead.games.rpg.commandline.pages.playerName.PlayerNamePage;
 import pihead.games.rpg.commandline.responses.Intent;
 import pihead.games.rpg.commandline.views.SelectOptionView;
 import pihead.games.rpg.commandline.views.Page;
-import pihead.games.rpg.commandline.views.pages.PlayerNamePage;
 
 import java.util.List;
 

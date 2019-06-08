@@ -35,7 +35,6 @@ public final class Intent {
 
     public enum Action {
         GO_BACK,
-        SAVE_GAME,
-        LOAD_GAME
+        EXIT_GAME,
     }
 }
